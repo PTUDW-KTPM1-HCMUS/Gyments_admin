@@ -5,9 +5,30 @@
 
 <div class="app-wrapper">
     <div class="container pt-5">
-        <div class="banner_img"></div>
-        <div class="jumbotron">
-            <h1>Add new product</h1>
+        <!-- Slideshow container -->
+        <div class="slideshow-container">
+            <!-- Full-width images with number and caption text -->
+            <div class="mySlides fade_1">
+                <img src="/images/background/about-img.jpg" class="mySlides_img">
+                <div class="text">Serious Equipment for Serious Fitness!</div>
+            </div>
+
+            <div class="mySlides fade_1">
+                <img src="/images/background/background-1.jpg" class="mySlides_img">
+                <div class="text">We look forward to Supplying you with everything you need to support your healthy lifestyle.</div>
+            </div>
+            <div class="mySlides fade_1">
+                <img src="/images/background/background-2.jpg" class="mySlides_img">
+                <div class="text">The Fitness Store isn't just a website.  We have a 7500 Sq Ft Retail Store in HCMUS.</div>
+            </div>
+        </div>
+        <br>
+
+        <!-- The dots/circles -->
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
         </div>
         <form style="padding-top: 20px">
             <div class="form-row">
@@ -88,3 +109,4 @@
         </form>
     </div>
 </div>
+<script src="/js/imageSlider.js"></script>
