@@ -5,7 +5,6 @@ const createError = require("http-errors");
 
 function route(app){
   app.use('/products',productRouter);
-
   app.use('/user',userRouter);
   app.use('/', siteRouter);
 
