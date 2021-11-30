@@ -27,14 +27,14 @@ p.top-info {
 }
 form {
     width: 100%;
-    padding: 20px;
+    /*padding: 10px;*/
     border-radius: 6px;
     background: #fff;
     box-shadow: 0 0 25px 0 #1c87c9;
 }
 .banner {
     position: relative;
-    height: 210px;
+    height: 150px;
     background-image: url("../images/background/background-1.jpg");
     background-size: cover;
     display: flex;
