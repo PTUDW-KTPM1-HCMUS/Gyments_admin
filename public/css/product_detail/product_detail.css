@@ -58,9 +58,9 @@ ul {
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
-.mySlides.fade_1 img{
+/* .mySlides.fade_1 img{
     height: auto;
-}
+} */
 
 .pro-img {
     position: relative;
@@ -647,7 +647,6 @@ ul {
     max-width: 1000px;
     position: relative;
     margin: auto;
-    height: 449px;
 }
 
 /* Hide the images by default */
