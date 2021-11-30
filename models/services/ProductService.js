@@ -1,5 +1,5 @@
 const Product = require('../data/product');
-const Account = require("../../models/data/account");
+
 
 const add_list = async(reqPage)=>{
     let products = [];
