@@ -360,7 +360,5 @@ window.addEventListener('load', function(){
 	
 	var doughnutChart = document.getElementById('chart-doughnut').getContext('2d');
 	window.myDoughnut = new Chart(doughnutChart, doughnutChartConfig);
-	
-
 });	
 	
