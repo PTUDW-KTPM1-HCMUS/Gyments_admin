@@ -1,11 +1,32 @@
-var express = require('express');
-var router = express.Router();
+const siteRouter = require('../routes/site');
+const productRouter = require('../routes/products');
+const userRouter = require('../routes/users');
+const createError = require("http-errors");
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+function route(app){
+
+  app.use('/user',userRouter);
+  app.use('/', siteRouter);
+
+  // catch 404 and forward to error handler
+  app.use(function(req, res, next) {
+    next(createError(404));
+  });
+
+  // error handler
+  app.use(function(err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
+  });
+
+}
 
 
 
-module.exports = router;
+
+module.exports = route;
