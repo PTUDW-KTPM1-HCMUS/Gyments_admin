@@ -1,6 +1,6 @@
 const Product = require('../data/product');
 
-
+// get all products in database
 const add_list = async(reqPage)=>{
     let products = [];
     let pages = [];
@@ -25,8 +25,8 @@ const add_list = async(reqPage)=>{
             let rate = new Array(item.rate).fill(0);
             if (item.name.length >= 30)
                 name = item.name.slice(0, 28) + "...";
-            let productID = "/products/updateProduct/" + item.productID;
-            return { ...item, name: name,  rate: rate, productID: productID}
+            // let productID = "/products/updateProduct/" + item.productID;
+            return { ...item, name: name,  rate: rate}
         });
 
         return [products, pages];
@@ -35,13 +35,13 @@ const add_list = async(reqPage)=>{
     }
     return [products, pages]
 }
-
+// get all information of product by productID
 const add_detail = async (productID) => {
     let productDetails = null;
     try{
         productDetails = await Product.findOne({productID: productID}).lean();
         // let indexOfProduct = parseInt(productID.slice(-2));
-        productDetails.productID = "/products/updateProduct/" + productDetails.productID;
+        // productDetails.productID = "/products/updateProduct/" + productDetails.productID;
         productDetails.rate = new Array(productDetails.rate).fill(0);
         return productDetails;
     }catch (err){
@@ -49,6 +49,7 @@ const add_detail = async (productID) => {
     }
     return productDetails;
 }
+// update a product by productID
 const updateOneProduct = async (productID, productDetail) => {
     let updateProduct = null;
     try{
@@ -84,4 +85,15 @@ const updateOneProduct = async (productID, productDetail) => {
     }
     return updateProduct;
 }
-module.exports = {add_list , add_detail, updateOneProduct};
+// delete a product by productID
+const deleteOneProduct = async (productID) => {
+    let removedProduct = null;
+    try{
+        removedProduct = await Product.remove({"productID": productID});
+        return removedProduct;
+    }catch (err){
+        console.log({message: err});
+    }
+    return removedProduct;
+}
+module.exports = {add_list , add_detail, updateOneProduct, deleteOneProduct};
