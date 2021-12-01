@@ -18,10 +18,19 @@ class ProductsController{
         res.render('products/addProducts');
     }
     //[GET] products update Page
+    async showUpdatePage(req, res){
+        try{
+            const productDetails = await service.add_detail(req.params.productID);
+            res.render('products/updateProduct',{productDetails});
+        }catch(err){
+            console.log({message: err});
+        }
+    }
     async updateProduct(req, res){
         try{
-            const [productDetails] = await service.add_detail(req.params.productID);
-            res.render('products/updateProduct',{productDetails});
+            const updatedProduct = await service.updateOneProduct(req.params.productID, req.body);
+            const productDetails = await service.add_detail(req.params.productID);
+            res.render('products/updateProduct', {productDetails});
         }catch(err){
             console.log({message: err});
         }

@@ -5,7 +5,8 @@ const ProductsController = require('../Controller/ProductsController');
 
 
 router.get('/addProducts',ProductsController.addProduct);
-router.get('/updateProduct/:productID', ProductsController.updateProduct);
+router.get('/updateProduct/:productID', ProductsController.showUpdatePage);
+router.post('/updateProduct/:productID', ProductsController.updateProduct);
 router.get('/',ProductsController.ProductsPage);
 
 

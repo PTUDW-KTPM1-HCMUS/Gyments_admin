@@ -36,17 +36,41 @@ const add_list = async(reqPage)=>{
     return [products, pages]
 }
 
-const add_detail = async (productID) =>{
+const add_detail = async (productID) => {
     let productDetails = null;
     try{
         productDetails = await Product.findOne({productID: productID}).lean();
         // let indexOfProduct = parseInt(productID.slice(-2));
         productDetails.rate = new Array(productDetails.rate).fill(0);
-
-        return [productDetails];
+        return productDetails;
     }catch (err){
         console.log({message: err});
     }
-    return [productDetails];
+    return productDetails;
 }
-module.exports = {add_list , add_detail};
+const updateOneProduct = async (productID, productDetail) => {
+    let updateProduct = null;
+    try{
+        updateProduct = await Product.updateOne(
+            {"productID": productID},
+            {
+                $set: {
+                    name: productDetail.name,
+                    price: productDetail.price,
+                    overview: productDetail.overview,
+                    rate: productDetail.rate,
+                    sale: productDetail.sale,
+                    description: productDetail.description,
+                    // images: productDetail.images,
+                    quantity: productDetail.quantity,
+                    categoryID: productDetail.categoryID
+                }
+            }
+        );
+        return updateProduct;
+    }catch (err){
+        console.log({message: err});
+    }
+    return updateProduct;
+}
+module.exports = {add_list , add_detail, updateOneProduct};
