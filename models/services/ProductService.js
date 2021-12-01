@@ -25,8 +25,8 @@ const add_list = async(reqPage)=>{
             let rate = new Array(item.rate).fill(0);
             if (item.name.length >= 30)
                 name = item.name.slice(0, 28) + "...";
-            // let productID = "/product/" + item.productID;
-            return { ...item, name: name,  rate: rate }
+            let productID = "/products/updateProduct/" + item.productID;
+            return { ...item, name: name,  rate: rate, productID: productID}
         });
 
         return [products, pages];
@@ -41,6 +41,7 @@ const add_detail = async (productID) => {
     try{
         productDetails = await Product.findOne({productID: productID}).lean();
         // let indexOfProduct = parseInt(productID.slice(-2));
+        productDetails.productID = "/products/updateProduct/" + productDetails.productID;
         productDetails.rate = new Array(productDetails.rate).fill(0);
         return productDetails;
     }catch (err){
@@ -51,6 +52,16 @@ const add_detail = async (productID) => {
 const updateOneProduct = async (productID, productDetail) => {
     let updateProduct = null;
     try{
+        // get old product information
+        const oldProductInfo = await Product.findOne({productID: productID}).lean();
+        // check if this value of key is "" then assign old value to it
+        const keys = Object.keys(productDetail);
+        keys.forEach((key, index) => {
+            if(productDetail[key] == ""){
+                productDetail[key] = oldProductInfo[key];
+            }
+        });
+
         updateProduct = await Product.updateOne(
             {"productID": productID},
             {

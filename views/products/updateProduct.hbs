@@ -6,7 +6,7 @@
 <div class="app-wrapper">
     <div class="container pt-5 clearfix">
         <h1>You are updating product: {{productDetails.name}}</h1>
-        <form action="/products/updateProduct/{{productDetails.productID}}" method="POST" style="padding-top: 20px">
+        <form action="{{productDetails.productID}}" method="POST" style="padding-top: 20px">
             <div class="form-group">
                 <label for="productName">Product Name</label>
                 <input type="text" class="form-control" placeholder="Old name: {{productDetails.name}}" name="name" value="{{product.name}}">
