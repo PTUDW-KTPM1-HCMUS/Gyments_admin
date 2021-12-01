@@ -39,7 +39,7 @@ const add_list = async(reqPage)=>{
 const add_detail = async (productID) => {
     let productDetails = null;
     try{
-        productDetails = await Product.findOne({productID: productID}).lean();
+        productDetails = await Product.findById(productID).lean();
         // let indexOfProduct = parseInt(productID.slice(-2));
         // productDetails.productID = "/products/updateProduct/" + productDetails.productID;
         productDetails.rate = new Array(productDetails.rate).fill(0);
@@ -54,7 +54,7 @@ const updateOneProduct = async (productID, productDetail) => {
     let updateProduct = null;
     try{
         // get old product information
-        const oldProductInfo = await Product.findOne({productID: productID}).lean();
+        const oldProductInfo = await Product.findById(productID).lean();
         // check if this value of key is "" then assign old value to it
         const keys = Object.keys(productDetail);
         keys.forEach((key, index) => {
@@ -62,24 +62,13 @@ const updateOneProduct = async (productID, productDetail) => {
                 productDetail[key] = oldProductInfo[key];
             }
         });
-
-        updateProduct = await Product.updateOne(
-            {"productID": productID},
-            {
-                $set: {
-                    name: productDetail.name,
-                    price: productDetail.price,
-                    overview: productDetail.overview,
-                    rate: productDetail.rate,
-                    sale: productDetail.sale,
-                    description: productDetail.description,
-                    // images: productDetail.images,
-                    quantity: productDetail.quantity,
-                    categoryID: productDetail.categoryID
-                }
+        updateProduct = await Product.findOneAndUpdate({_id: productID}, productDetail, {new: true}, (err, doc) => {
+            if(!err){
+                return updateProduct;
+            }else{
+                console.log({message: err});
             }
-        );
-        return updateProduct;
+        });
     }catch (err){
         console.log({message: err});
     }
@@ -89,7 +78,7 @@ const updateOneProduct = async (productID, productDetail) => {
 const deleteOneProduct = async (productID) => {
     let removedProduct = null;
     try{
-        removedProduct = await Product.deleteOne({"productID": productID});
+        removedProduct = await Product.findByIdAndDelete(productID);
         return removedProduct;
     }catch (err){
         console.log({message: err});
@@ -100,7 +89,7 @@ const deleteOneProduct = async (productID) => {
 const showDetail = async(productID) => {
     let detail = null;
     try{
-        detail = await Product.findOne({"productID":productID}).lean();
+        detail = await Product.findById(productID).lean();
         detail.rate = new Array(detail.rate).fill(0);
         // split the description to array
         const words = detail.description.split('.');
