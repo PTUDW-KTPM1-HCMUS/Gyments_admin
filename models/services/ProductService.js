@@ -110,7 +110,6 @@ const showDetail = async(productID) => {
         }
         detail.description = words;
 
-        console.log(productID);
         return [detail];
     }catch(err){
         console.log({message:err});
