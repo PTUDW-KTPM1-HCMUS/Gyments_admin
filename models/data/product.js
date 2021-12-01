@@ -30,11 +30,7 @@ const productSchema = mongoose.Schema({
         require: true
     },
     images: {
-        type: "Array",
-        // items: {
-        //     type: "string",
-        //     default: "images/p1.png"
-        // }
+        type: "Array"
     },
     quantity: {
         type: "number",

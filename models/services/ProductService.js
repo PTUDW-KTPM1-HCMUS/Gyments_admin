@@ -105,4 +105,23 @@ const showDetail = async(productID) => {
     }
     return [detail];
 }
-module.exports = {add_list , add_detail, updateOneProduct, deleteOneProduct, showDetail};
+const addOneProduct = async (productDetail) => {
+    const newProduct = new Product({
+        name: productDetail.name,
+        price: productDetail.price,
+        overview: productDetail.overview,
+        description: productDetail.description,
+        rate: productDetail.rate,
+        sale: productDetail.sale,
+        quantity: productDetail.quantity,
+        categoryID: productDetail.categoryID,
+        images: ["/images/products/p25.jpg", "/images/products/p26.jpg"]
+    });
+    try {
+        const savedProduct = await newProduct.save();
+        return savedProduct;
+    }catch(err){
+        console.log({message: err});
+    }
+}
+module.exports = {add_list , add_detail, updateOneProduct, deleteOneProduct, showDetail, addOneProduct};

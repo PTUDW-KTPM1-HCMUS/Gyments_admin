@@ -13,8 +13,8 @@ class ProductsController{
             console.log({message: err});
         }
     }
-    
-    addProduct(req,res){
+    //[GET] add new product page
+    showAddProductPage(req,res){
         res.render('products/addProducts');
     }
     //[GET] products update Page
@@ -26,7 +26,7 @@ class ProductsController{
             console.log({message: err});
         }
     }
-    // update product information
+    // [POST] update product information
     async updateProduct(req, res){
         try{
             const updatedProduct = await service.updateOneProduct(req.params.productID, req.body);
@@ -36,7 +36,7 @@ class ProductsController{
             console.log({message: err});
         }
     }
-    // delete a product
+    // [DELETE] delete a product
     async deleteProduct(req, res){
         try{
             const deletedProduct = await service.deleteOneProduct(req.params.productID);
@@ -45,7 +45,7 @@ class ProductsController{
             console.log({message: err});
         }
     }
-
+    // [GET] get product detail
     async detail(req,res){
         try{
             const [detail] = await service.showDetail(req.params.productID);
@@ -53,6 +53,15 @@ class ProductsController{
             res.render('products/productsDetail',{detail,newPrice});
         }catch(err){
             console.log({message:err});
+        }
+    }
+    // [POST] add new product
+    async addProduct(req, res){
+        try{
+            const newProduct = await service.addOneProduct(req.body);
+            res.render('products/addProducts');
+        }catch (err){
+            console.log({message: err});
         }
     }
 }
