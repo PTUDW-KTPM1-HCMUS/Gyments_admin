@@ -13,6 +13,7 @@ class ProductsController{
             console.log({message: err});
         }
     }
+    
     addProduct(req,res){
         res.render('products/addProducts');
     }
@@ -46,6 +47,16 @@ class ProductsController{
             res.render('products/products',{products, pages, currentPage,previous,next});
         }catch(err){
             console.log({message: err});
+        }
+    }
+
+    async detail(req,res){
+        try{
+            const [detail] = await service.showDetail(req.params.productID);
+            let newPrice = detail.price - detail.price * detail.sale / 100;
+            res.render('products/productsDetail',{detail,newPrice});
+        }catch(err){
+            console.log({message:err});
         }
     }
 }

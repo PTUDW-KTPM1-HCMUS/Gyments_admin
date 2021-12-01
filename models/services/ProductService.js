@@ -6,7 +6,7 @@ const add_list = async(reqPage)=>{
     let pages = [];
     try{
         products = await Product.find().lean();
-        const perPage = 9;
+        const perPage = 8;
         const page = parseInt(reqPage);
 
         const pro_start = (page - 1) * perPage;
@@ -25,15 +25,15 @@ const add_list = async(reqPage)=>{
             let rate = new Array(item.rate).fill(0);
             if (item.name.length >= 30)
                 name = item.name.slice(0, 28) + "...";
-            // let productID = "/products/updateProduct/" + item.productID;
-            return { ...item, name: name,  rate: rate}
+            //let productID = "/product/" + item.productID;
+            return { ...item, name: name, productID: productID, rate: rate }
         });
 
         return [products, pages];
     }catch(err){
         console.log({message: err});
     }
-    return [products, pages]
+    return [products, pages];   
 }
 // get all information of product by productID
 const add_detail = async (productID) => {
@@ -96,4 +96,25 @@ const deleteOneProduct = async (productID) => {
     }
     return removedProduct;
 }
-module.exports = {add_list , add_detail, updateOneProduct, deleteOneProduct};
+
+const showDetail = async(productID)=>{
+    let detail = null;
+    try{
+        detail = await Product.findOne({"productID":productID}).lean();
+        detail.rate = new Array(detail.rate).fill(0);
+        // split the description to array
+        const words = detail.description.split('.');
+        // remove the last element because it's just space
+        if (words[words.length - 1] === ""){
+            words.splice(-1);
+        }
+        detail.description = words;
+
+        console.log(productID);
+        return [detail];
+    }catch(err){
+        console.log({message:err});
+    }
+    return [detail];
+}
+module.exports = {add_list , add_detail, updateOneProduct, deleteOneProduct, showDetail};

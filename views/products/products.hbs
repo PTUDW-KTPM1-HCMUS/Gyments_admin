@@ -51,13 +51,13 @@
 							    <div class="app-card-thumb">
                                 <img class="thumb-image" src={{this.images.[0]}} alt="">
                             </div>
-                            <a class="app-card-link-mask" href="#file-link"></a>
+                            <a class="app-card-link-mask" href="/products/{{this.productID}}"></a>
                             <span class="badge bg-success">NEW</span>
-                            <a class="app-card-link-mask" href="#file-link"></a>
+                            <a class="app-card-link-mask" href="/products/{{this.productID}}"></a>
                         </div>
                         <div class="app-card-body p-3 has-card-actions">
 
-                            <h4 class="app-doc-title truncate mb-0"><a href="#file-link">{{this.name}}</a></h4>
+                            <h4 class="app-doc-title truncate mb-0"><a href="/products/{{this.productID}}">{{this.name}}</a></h4>
                             <div class="app-doc-meta">
                                 <ul class="list-unstyled mb-0">
                                     <li><span class="text-muted">Price:</span> {{this.price}}$</li>
@@ -130,3 +130,5 @@
 
 </div><!--//app-wrapper-->
 <script src="/js/productPagination.js"></script>
+
+
