@@ -25,8 +25,8 @@ const add_list = async(reqPage)=>{
             let rate = new Array(item.rate).fill(0);
             if (item.name.length >= 30)
                 name = item.name.slice(0, 28) + "...";
-            let productID = "/product/" + item.productID;
-            return { ...item, name: name, productID: productID, rate: rate }
+            // let productID = "/product/" + item.productID;
+            return { ...item, name: name,  rate: rate }
         });
 
         return [products, pages];
@@ -38,23 +38,15 @@ const add_list = async(reqPage)=>{
 
 const add_detail = async (productID) =>{
     let productDetails = null;
-    let relatedProducts = [];
     try{
         productDetails = await Product.findOne({productID: productID}).lean();
         // let indexOfProduct = parseInt(productID.slice(-2));
-        // we use $ne (not equal) here to skip the current product from related product
-        relatedProducts = await Product.find({categoryID: productDetails.categoryID, productID: { $ne: productID}}).lean();
-
         productDetails.rate = new Array(productDetails.rate).fill(0);
-        relatedProducts = relatedProducts.map(item => {
-            let productID = "/product/" + item.productID;
-            return { ...item, productID: productID }
-        });
 
-        return [productDetails, relatedProducts];
+        return [productDetails];
     }catch (err){
         console.log({message: err});
     }
-    return [productDetails, relatedProducts];
+    return [productDetails];
 }
 module.exports = {add_list , add_detail};

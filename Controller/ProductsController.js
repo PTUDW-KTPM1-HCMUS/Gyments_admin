@@ -17,6 +17,15 @@ class ProductsController{
     addProduct(req,res){
         res.render('products/addProducts');
     }
+    //[GET] products update Page
+    async updateProduct(req, res){
+        try{
+            const [productDetails] = await service.add_detail(req.params.productID);
+            res.render('products/updateProduct',{productDetails});
+        }catch(err){
+            console.log({message: err});
+        }
+    }
 }
 
 module.exports = new ProductsController;

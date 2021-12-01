@@ -1,5 +1,5 @@
 body, html {
-    height: 1200px;
+    height: 1270px;
     margin: 0;
 }
 .page-item.cur_pos .page-link {
@@ -40,6 +40,11 @@ body, html {
     height: 400px;
     background-size: cover;
     border: 1px solid #ffffff;
+}
+.mySlides .mySlides_img_1{
+    width: 100%;
+    height: auto;
+    background-size: cover;
 }
 /* Next & previous buttons */
 .prev, .next {
