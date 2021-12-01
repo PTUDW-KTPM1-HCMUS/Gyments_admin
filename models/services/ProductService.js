@@ -1,7 +1,7 @@
 const Product = require('../data/product');
 
 // get all products in database
-const add_list = async(reqPage)=>{
+const getProductList = async(reqPage)=>{
     let products = [];
     let pages = [];
     try{
@@ -36,7 +36,7 @@ const add_list = async(reqPage)=>{
     return [products, pages];   
 }
 // get all information of product by productID
-const add_detail = async (productID) => {
+const getProduct = async (productID) => {
     let productDetails = null;
     try{
         productDetails = await Product.findById(productID).lean();
@@ -62,7 +62,7 @@ const updateOneProduct = async (productID, productDetail) => {
                 productDetail[key] = oldProductInfo[key];
             }
         });
-        updateProduct = await Product.findOneAndUpdate({_id: productID}, productDetail, {new: true}, (err, doc) => {
+        updateProduct = await Product.findOneAndUpdate({_id: productID}, productDetail, {new: true}, (err, docs)=>{
             if(!err){
                 return updateProduct;
             }else{
@@ -124,4 +124,4 @@ const addOneProduct = async (productDetail) => {
         console.log({message: err});
     }
 }
-module.exports = {add_list , add_detail, updateOneProduct, deleteOneProduct, showDetail, addOneProduct};
+module.exports = {getProductList, getProduct, updateOneProduct, deleteOneProduct, showDetail, addOneProduct};

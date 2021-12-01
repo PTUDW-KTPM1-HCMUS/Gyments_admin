@@ -41,6 +41,7 @@
                     <span style="color: #cc0000;">*</span>
                     <label for="exampleFormControlSelect1">Category</label>
                     <select class="form-control" id="exampleFormControlSelect1" name="categoryID" value="{{product.categoryID}}">
+                        <option value="" disabled selected hidden>Choose...</option>
                         <option value="category01">Whey</option>
                         <option value="category02">Dumbbells</option>
                         <option value="category03">Nutrients</option>
@@ -87,6 +88,7 @@
                     <span style="color: #cc0000;">*</span>
                     <label for="inputRating">Rating Stars</label>
                     <select class="form-control" name="rate" value="{{product.rate}}">
+                        <option value="" disabled selected hidden>Choose...</option>
                         <option value="5">5</option>
                         <option value="4">4</option>
                         <option value="3">3</option>
