@@ -26,7 +26,7 @@ const add_list = async(reqPage)=>{
             if (item.name.length >= 30)
                 name = item.name.slice(0, 28) + "...";
             //let productID = "/product/" + item.productID;
-            return { ...item, name: name, productID: productID, rate: rate }
+            return { ...item, name: name, rate: rate }
         });
 
         return [products, pages];
@@ -89,15 +89,15 @@ const updateOneProduct = async (productID, productDetail) => {
 const deleteOneProduct = async (productID) => {
     let removedProduct = null;
     try{
-        removedProduct = await Product.remove({"productID": productID});
+        removedProduct = await Product.deleteOne({"productID": productID});
         return removedProduct;
     }catch (err){
         console.log({message: err});
     }
     return removedProduct;
 }
-
-const showDetail = async(productID)=>{
+// get all information of product by productID
+const showDetail = async(productID) => {
     let detail = null;
     try{
         detail = await Product.findOne({"productID":productID}).lean();
