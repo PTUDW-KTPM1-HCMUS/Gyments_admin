@@ -68,7 +68,7 @@ const updateOneProduct = async (productID, productDetail) => {
             }else{
                 console.log({message: err});
             }
-        });
+        }).clone();
     }catch (err){
         console.log({message: err});
     }
