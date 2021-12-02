@@ -107,7 +107,7 @@ const showDetail = async(productID) => {
     }
     return [detail];
 }
-const addOneProduct =  async (productDetail, filePath) => {
+const addOneProduct =  async (productDetail) => {
     const newProduct = new Product({
         name: productDetail.name,
         price: productDetail.price,

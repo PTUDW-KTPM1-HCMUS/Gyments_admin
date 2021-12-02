@@ -58,8 +58,7 @@ class ProductsController{
     // [POST] add new product
     async addProduct(req, res){
         try{
-            console.log(req);
-            const newProduct = await service.addOneProduct(req.body, req.file.path);
+            const newProduct = await service.addOneProduct(req.body);
             res.render('products/addProducts');
         }catch (err){
             console.log({message: err});
