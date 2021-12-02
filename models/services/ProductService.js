@@ -1,6 +1,5 @@
 const Product = require('../data/product');
 const cloudinary = require('./utils/cloudinary');
-const upload = require('./utils/multer');
 
 // get all products in database
 const getProductList = async(reqPage)=>{
@@ -107,7 +106,10 @@ const showDetail = async(productID) => {
     }
     return [detail];
 }
-const addOneProduct =  async (productDetail) => {
+const addOneProduct =  async (productDetail, imgDetail) => {
+
+    const imgResult = await cloudinary.uploader.upload(imgDetail.path);
+
     const newProduct = new Product({
         name: productDetail.name,
         price: productDetail.price,
@@ -117,7 +119,8 @@ const addOneProduct =  async (productDetail) => {
         sale: productDetail.sale,
         quantity: productDetail.quantity,
         categoryID: productDetail.categoryID,
-        images: ["/images/products/p25.jpg", "/images/products/p26.jpg"]
+        images: [imgResult.secure_url],
+        imagesID: [imgResult.public_id]
     });
     try {
         const savedProduct = await newProduct.save();
