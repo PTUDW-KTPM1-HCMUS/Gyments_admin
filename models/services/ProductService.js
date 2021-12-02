@@ -108,7 +108,13 @@ const showDetail = async(productID) => {
 }
 const addOneProduct =  async (productDetail, imgDetail) => {
 
-    const imgResult = await cloudinary.uploader.upload(imgDetail.path);
+    let images = [];
+    let imagesID = [];
+    for (let i =0; i<imgDetail.length;i++){
+        let imgResult = await cloudinary.uploader.upload(imgDetail[i].path);
+        imagesID[i] = imgResult.public_id;
+        images[i] = imgResult.secure_url;
+    }
 
     const newProduct = new Product({
         name: productDetail.name,
@@ -119,8 +125,8 @@ const addOneProduct =  async (productDetail, imgDetail) => {
         sale: productDetail.sale,
         quantity: productDetail.quantity,
         categoryID: productDetail.categoryID,
-        images: [imgResult.secure_url],
-        imagesID: [imgResult.public_id]
+        images: images,
+        imagesID: imagesID
     });
     try {
         const savedProduct = await newProduct.save();
