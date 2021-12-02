@@ -1,4 +1,6 @@
 const Product = require('../data/product');
+const cloudinary = require('./utils/cloudinary');
+const upload = require('./utils/multer');
 
 // get all products in database
 const getProductList = async(reqPage)=>{
@@ -105,7 +107,7 @@ const showDetail = async(productID) => {
     }
     return [detail];
 }
-const addOneProduct = async (productDetail) => {
+const addOneProduct =  async (productDetail, filePath) => {
     const newProduct = new Product({
         name: productDetail.name,
         price: productDetail.price,
@@ -123,5 +125,5 @@ const addOneProduct = async (productDetail) => {
     }catch(err){
         console.log({message: err});
     }
-}
+};
 module.exports = {getProductList, getProduct, updateOneProduct, deleteOneProduct, showDetail, addOneProduct};

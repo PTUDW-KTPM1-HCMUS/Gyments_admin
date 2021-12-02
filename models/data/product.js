@@ -32,6 +32,9 @@ const productSchema = mongoose.Schema({
     images: {
         type: "Array"
     },
+    imagesID:{
+        type: "Array"
+    },
     quantity: {
         type: "number",
         require: true
