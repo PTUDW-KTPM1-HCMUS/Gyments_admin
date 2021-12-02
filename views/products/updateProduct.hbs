@@ -6,7 +6,7 @@
 <div class="app-wrapper">
     <div class="container pt-5 clearfix">
         <h1>You are updating product: {{productDetails.name}}</h1>
-        <form action="/products/updateProduct/{{productDetails._id}}" method="POST" style="padding-top: 20px">
+        <form action="/products/updateProduct/{{productDetails._id}}"  enctype="multipart/form-data" method="POST" style="padding-top: 20px">
             <div class="form-group">
                 <label for="productName">Product Name</label>
                 <input type="text" class="form-control" placeholder="Old name: {{productDetails.name}}" name="name" value="{{product.name}}">
@@ -89,9 +89,11 @@
                     <label for="inputQuantity">Product Quantity</label>
                     <input type="text" class="form-control" placeholder="Old quantity: {{productDetails.quantity}}" name="quantity" value="{{product.quantity}}">
                 </div>
+
                 <div class="form-group col-md-4">
+                    <span style="color: #cc0000;">*</span>
                     <label for="exampleFormControlFile1">Input product image</label>
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="images" multiple>
                 </div>
             </div>
             <div class="form-group">

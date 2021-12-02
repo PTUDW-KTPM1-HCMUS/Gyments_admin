@@ -51,11 +51,24 @@ const getProduct = async (productID) => {
     return productDetails;
 }
 // update a product by productID
-const updateOneProduct = async (productID, productDetail) => {
+const updateOneProduct = async (productID, productDetail, imgDetail) => {
     let updateProduct = null;
     try{
+        let images = [];
+        let imagesID = [];
+        console.log(imgDetail);
+        if (imgDetail != null){
+            for (let i =0; i<imgDetail.length;i++){
+                let imgResult = await cloudinary.uploader.upload(imgDetail[i].path);
+                imagesID[i] = imgResult.public_id;
+                images[i] = imgResult.secure_url;
+            }
+        }
+        productDetail.images = images;
+        productDetail.imagesID = imagesID;
         // get old product information
         const oldProductInfo = await Product.findById(productID).lean();
+
         // check if this value of key is "" then assign old value to it
         const keys = Object.keys(productDetail);
         keys.forEach((key, index) => {

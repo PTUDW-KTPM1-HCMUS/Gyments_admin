@@ -29,7 +29,7 @@ class ProductsController{
     // [POST] update product information
     async updateProduct(req, res){
         try{
-            const updatedProduct = await service.updateOneProduct(req.params.productID, req.body);
+            const updatedProduct = await service.updateOneProduct(req.params.productID, req.body, req.files);
             const productDetails = await service.getProduct(req.params.productID);
             res.render('products/updateProduct', {productDetails});
         }catch(err){
