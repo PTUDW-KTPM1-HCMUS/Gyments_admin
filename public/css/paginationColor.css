@@ -1,0 +1,6 @@
+.page-item.cur_pos .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #15a362;
+    border-color: #15a362;
+}

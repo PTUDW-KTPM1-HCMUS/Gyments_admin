@@ -1,0 +1,282 @@
+<link rel="stylesheet" href="/css/paginationColor.css">
+<div class="app-wrapper">
+    <div class="app-content pt-3 p-md-3 p-lg-4">
+        <div class="container-xl">
+
+            <div class="row g-3 mb-4 align-items-center justify-content-between">
+                <div class="col-auto">
+                    <h1 class="app-page-title mb-0">
+                        User Management
+                        <i class="bi bi-chevron-double-right"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+                            <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                        {{option}}
+                    </h1>
+                </div>
+                <div class="col-auto">
+                    <div class="page-utilities">
+                        <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+                            <div class="col-auto">
+                                <form class="table-search-form row gx-1 align-items-center">
+                                    <div class="col-auto">
+                                        <input type="text" id="search-orders" name="username" class="form-control search-orders" placeholder="Search">
+                                    </div>
+                                    <div class="col-auto">
+                                        <select class="form-select w-auto" name="options">
+                                            <option value="All">All</option>
+                                            <option value="Users">Users</option>
+                                            <option value="Administrators">Administrators</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button type="submit" class="btn app-btn-secondary">Search</button>
+                                    </div>
+                                </form>
+                            </div><!--//col-->
+
+                            <div class="col-auto">
+                                <a class="btn app-btn-secondary" href="#">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download me-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                        <path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                                    </svg>
+                                    Download CSV
+                                </a>
+                            </div>
+                        </div><!--//row-->
+                    </div><!--//table-utilities-->
+                </div><!--//col-auto-->
+            </div><!--//row-->
+
+
+            <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
+                <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">All</a>
+                <a class="flex-sm-fill text-sm-center nav-link"  id="orders-paid-tab" data-bs-toggle="tab" href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">Active</a>
+                <a class="flex-sm-fill text-sm-center nav-link" id="orders-cancelled-tab" data-bs-toggle="tab" href="#orders-cancelled" role="tab" aria-controls="orders-cancelled" aria-selected="false">Banned</a>
+            </nav>
+
+
+            <div class="tab-content" id="orders-table-tab-content">
+                <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+                    <div class="app-card app-card-orders-table shadow-sm mb-5">
+                        <div class="app-card-body">
+                            <div class="table-responsive">
+                                <table class="table app-table-hover mb-0 text-left">
+                                    <thead>
+                                    <tr>
+                                        <th class="cell">ID</th>
+                                        <th class="cell">Account Type</th>
+                                        <th class="cell">Username</th>
+                                        <th class="cell">Password</th>
+                                        <th class="cell">Date</th>
+                                        <th class="cell">Status</th>
+                                        <th class="cell">Options</th>
+                                        <th class="cell"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {{#each accounts}}
+                                        <tr>
+                                            <td class="cell">{{this._id}}</td>
+                                            {{#if this.userType}}
+                                                <td class="cell">Administrator</td>
+                                            {{else}}
+                                                <td class="cell">User</td>
+                                            {{/if}}
+                                            <td class="cell"><span class="truncate">{{this.username}}</span></td>
+                                            <td class="cell">{{this.password}}</td>
+                                            <td class="cell"><span>17 Oct</span><span class="note">2:16 PM</span></td>
+                                            {{#if this.status}}
+                                                <td class="cell"><span class="badge bg-success">Active</span></td>
+                                            {{else}}
+                                                <td class="cell"><span class="badge bg-danger">Banned</span></td>
+                                            {{/if}}
+                                            <td class="cell">
+                                            <span>
+                                                <a href="#" class="pe-4" >
+                                                    <i class="bi bi-person-check"></i>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-check" viewBox="0 0 16 16">
+                                                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                                        <path fill-rule="evenodd" d="M15.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                                                    </svg>
+                                                </a>
+                                            </span>
+                                                <span>
+                                                <a href="#">
+                                                    <i class="bi bi-person-x"></i>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
+                                                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                                        <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
+                                                    </svg>
+                                                </a>
+                                            </span>
+                                            </td>
+                                            <td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a></td>
+                                        </tr>
+                                    {{/each}}
+                                    </tbody>
+                                </table>
+                            </div><!--//table-responsive-->
+
+                        </div><!--//app-card-body-->
+                    </div><!--//app-card-->
+                    {{#if length}}
+                        <nav class="app-pagination mt-5">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item">
+                                    <a class="page-link" href="?username={{username}}&options={{option}}&page={{previous}}">Previous</a>
+                                </li>
+                                {{#each pages}}
+                                    <li class="page-item need_color" name="{{this.currentPage}}"><a class="page-link" href="{{this.pageLink}}">{{this.currentPage}}</a></li>
+                                {{/each}}
+                                <li class="page-item">
+                                    <a class="page-link" href="?username={{username}}&options={{option}}&page={{next}}">Next</a>
+                                </li>
+                            </ul>
+                            <div id="getCurPage" name = {{currentPage}}></div>
+                        </nav><!--//app-pagination-->
+                    {{/if}}
+                </div><!--//tab-pane-->
+
+                <div class="tab-pane fade" id="orders-paid" role="tabpanel" aria-labelledby="orders-paid-tab">
+                    <div class="app-card app-card-orders-table mb-5">
+                        <div class="app-card-body">
+                            <div class="table-responsive">
+
+                                <table class="table mb-0 text-left">
+                                    <thead>
+                                    <tr>
+                                        <th class="cell">ID</th>
+                                        <th class="cell">Account Type</th>
+                                        <th class="cell">Username</th>
+                                        <th class="cell">Password</th>
+                                        <th class="cell">Date</th>
+                                        <th class="cell">Status</th>
+                                        <th class="cell">Options</th>
+                                        <th class="cell"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {{#each activeAccounts}}
+                                        {{#if this.status}}
+                                            <tr>
+                                                <td class="cell">{{this._id}}</td>
+                                                {{#if this.userType}}
+                                                    <td class="cell">Administrator</td>
+                                                {{else}}
+                                                    <td class="cell">User</td>
+                                                {{/if}}
+                                                <td class="cell"><span class="truncate">{{this.username}}</span></td>
+                                                <td class="cell">{{this.password}}</td>
+                                                <td class="cell"><span>17 Oct</span><span class="note">2:16 PM</span></td>
+                                                <td class="cell"><span class="badge bg-success">Active</span></td>
+                                                <td class="cell">
+                                            <span>
+                                                <a href="#" class="pe-4" >
+                                                    <i class="bi bi-person-check"></i>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-check" viewBox="0 0 16 16">
+                                                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                                        <path fill-rule="evenodd" d="M15.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                                                    </svg>
+                                                </a>
+                                            </span>
+                                                    <span>
+                                                <a href="#">
+                                                    <i class="bi bi-person-x"></i>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
+                                                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                                        <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
+                                                    </svg>
+                                                </a>
+                                            </span>
+                                                </td>
+                                                <td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a></td>
+                                            </tr>
+                                        {{/if}}
+                                    {{/each}}
+                                    </tbody>
+                                </table>
+                            </div><!--//table-responsive-->
+                        </div><!--//app-card-body-->
+                    </div><!--//app-card-->
+                </div><!--//tab-pane-->
+                <div class="tab-pane fade" id="orders-cancelled" role="tabpanel" aria-labelledby="orders-cancelled-tab">
+                    <div class="app-card app-card-orders-table mb-5">
+                        <div class="app-card-body">
+                            <div class="table-responsive">
+                                <table class="table mb-0 text-left">
+                                    <thead>
+                                    <tr>
+                                        <th class="cell">ID</th>
+                                        <th class="cell">Account Type</th>
+                                        <th class="cell">Username</th>
+                                        <th class="cell">Password</th>
+                                        <th class="cell">Date</th>
+                                        <th class="cell">Status</th>
+                                        <th class="cell">Options</th>
+                                        <th class="cell"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {{#each bannedAccounts}}
+                                        {{#unless this.status}}
+                                            <tr>
+                                                <td class="cell">{{this._id}}</td>
+                                                {{#if this.userType}}
+                                                    <td class="cell">Administrator</td>
+                                                {{else}}
+                                                    <td class="cell">User</td>
+                                                {{/if}}
+                                                <td class="cell"><span class="truncate">{{this.username}}</span></td>
+                                                <td class="cell">{{this.password}}</td>
+                                                <td class="cell"><span>17 Oct</span><span class="note">2:16 PM</span></td>
+                                                <td class="cell"><span class="badge bg-danger">Banned</span></td>
+                                                <td class="cell">
+                                            <span>
+                                                <a href="#" class="pe-4" >
+                                                    <i class="bi bi-person-check"></i>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-check" viewBox="0 0 16 16">
+                                                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                                        <path fill-rule="evenodd" d="M15.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                                                    </svg>
+                                                </a>
+                                            </span>
+                                                    <span>
+                                                <a href="#">
+                                                    <i class="bi bi-person-x"></i>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
+                                                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                                        <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
+                                                    </svg>
+                                                </a>
+                                            </span>
+                                                </td>
+                                                <td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a></td>
+                                            </tr>
+                                        {{/unless}}
+                                    {{/each}}
+                                    </tbody>
+                                </table>
+                            </div><!--//table-responsive-->
+                        </div><!--//app-card-body-->
+                    </div><!--//app-card-->
+                </div><!--//tab-pane-->
+            </div><!--//tab-content-->
+
+
+
+        </div><!--//container-fluid-->
+    </div><!--//app-content-->
+
+    <footer class="app-footer">
+        <div class="container text-center py-3">
+            <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+            <small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a class="app-link" href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
+
+        </div>
+    </footer><!--//app-footer-->
+
+</div><!--//app-wrapper-->
+<script src="/js/productPagination.js"></script>

@@ -2,12 +2,7 @@ body, html {
     height: 1270px;
     margin: 0;
 }
-.page-item.cur_pos .page-link {
-    z-index: 1;
-    color: #fff;
-    background-color: #15a362;
-    border-color: #15a362;
-}
+
 .banner_img{
     background-image: url("../images/background/about-img.jpg");
     background-size: cover;
