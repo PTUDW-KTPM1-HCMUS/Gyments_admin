@@ -5,7 +5,4 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     res.render('account', { title: 'Account' });
 });
-
-
-
 module.exports = router;
