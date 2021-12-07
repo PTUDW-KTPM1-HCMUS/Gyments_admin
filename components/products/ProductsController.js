@@ -31,7 +31,7 @@ class ProductsController{
         try{
             const updatedProduct = await service.updateOneProduct(req.params.productID, req.body, req.files);
             const productDetails = await service.getProduct(req.params.productID);
-            res.render('products/views/updateProduct', {productDetails});
+            res.render('products/views/updateProduct', {productDetails, updatedProduct});
         }catch(err){
             console.log({message: err});
         }

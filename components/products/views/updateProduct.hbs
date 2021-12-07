@@ -5,6 +5,14 @@
 
 <div class="app-wrapper">
     <div class="container pt-5 clearfix">
+        {{#if updatedProduct}}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Update product successfully!!!</strong>
+                <button type="button" class="close" onclick="this.parentElement.style.display='none'">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {{/if}}
         <h1>You are updating product: {{productDetails.name}}</h1>
         <form action="/products/updateProduct/{{productDetails._id}}"  enctype="multipart/form-data" method="POST" style="padding-top: 20px">
             <div class="form-group">
