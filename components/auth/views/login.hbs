@@ -28,10 +28,22 @@
                 <div class="auth-form-container text-start">
 
                     <form class="auth-form login-form" action="/auth/login" method="POST">
-                        {{#if wrongInf}}
+                        {{#if invalid}}
                             <div class="alert">
                                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                                 Username or password is incorrect!
+                            </div>
+                        {{/if}}
+                        {{#if denied}}
+                            <div class="alert">
+                                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                                Your account does not have permission to access this page!
+                            </div>
+                        {{/if}}
+                        {{#if banned}}
+                            <div class="alert">
+                                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                                Your account is banned!
                             </div>
                         {{/if}}
                         <div class="username mb-3">
