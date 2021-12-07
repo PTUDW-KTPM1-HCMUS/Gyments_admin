@@ -29,6 +29,7 @@ class UserController{
             console.log({message: err});
         }
     }
+
 }
 
 module.exports = new UserController;

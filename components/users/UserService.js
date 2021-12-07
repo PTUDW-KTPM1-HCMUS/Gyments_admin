@@ -54,4 +54,17 @@ const showDetail = async (userID) => {
     }
     return detail;
 }
-module.exports = {getAccountList, showDetail}
+
+const findByUsername = function (username){
+    return Account.findOne({
+        username: username
+    }).lean();
+};
+
+const validPassword= async (password, user)=> {
+    return Account.findOne({
+        username: user.username,
+        password: password
+    }).lean();
+}
+module.exports = {getAccountList, showDetail, findByUsername, validPassword}

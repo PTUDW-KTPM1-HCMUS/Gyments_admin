@@ -1,12 +1,15 @@
 const siteRouter = require('../components/sites/site');
 const productRouter = require('../components/products/products');
 const userRouter = require('../components/users/users');
+const authRouter = require('../components/auth/auth');
+const guard = require('../Middlewares/guard');
 const createError = require("http-errors");
 
 function route(app){
-  app.use('/products',productRouter);
-  app.use('/user',userRouter);
-  app.use('/', siteRouter);
+  app.use('/products',guard,productRouter);
+  app.use('/user',guard,userRouter);
+  app.use('/auth', authRouter);
+  app.use('/',guard ,siteRouter);
 
   // catch 404 and forward to error handler
   app.use(function(req, res, next) {
