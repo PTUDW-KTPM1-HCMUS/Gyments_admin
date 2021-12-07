@@ -30,6 +30,14 @@
             <span class="dot" onclick="currentSlide(2)"></span>
             <span class="dot" onclick="currentSlide(3)"></span>
         </div>
+        {{#if newProduct}}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Add new product successfully!!!</strong> Check new product at products list page.
+                <button type="button" class="close" onclick="this.parentElement.style.display='none'">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {{/if}}
         <form style="padding-top: 20px" action="/products/addProducts" method="POST" enctype="multipart/form-data">
             <div class="form-row">
                 <div class="form-group col-md-8">
