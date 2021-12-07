@@ -1,6 +1,6 @@
-const siteRouter = require('../routes/site');
-const productRouter = require('../routes/products');
-const userRouter = require('../routes/users');
+const siteRouter = require('../components/sites/site');
+const productRouter = require('../components/products/products');
+const userRouter = require('../components/users/users');
 const createError = require("http-errors");
 
 function route(app){

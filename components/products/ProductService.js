@@ -1,5 +1,5 @@
-const Product = require('../data/product');
-const cloudinary = require('./utils/cloudinary');
+const Product = require('./ProductModel');
+const cloudinary = require('../../utils/cloudinary');
 
 // get all products in database
 const getProductList = async(reqPage)=>{

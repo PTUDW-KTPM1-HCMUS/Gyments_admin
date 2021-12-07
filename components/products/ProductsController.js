@@ -1,4 +1,4 @@
-const service = require('../models/services/ProductService');
+const service = require('./ProductService');
 
 class ProductsController{
     //[GET] products Page
@@ -8,20 +8,20 @@ class ProductsController{
             const [products, pages] = await service.getProductList(currentPage);
             let previous = Math.ceil(parseInt(currentPage)-1)<1? 1:Math.ceil(parseInt(currentPage)-1);
             let next = Math.ceil(parseInt(currentPage)+1) > pages.length?pages.length: Math.ceil(parseInt(currentPage)+1);
-            res.render('products/products',{products, pages, currentPage,previous,next});
+            res.render('products/views/products',{products, pages, currentPage,previous,next});
         }catch(err){
             console.log({message: err});
         }
     }
     //[GET] add new product page
     showAddProductPage(req,res){
-        res.render('products/addProducts');
+        res.render('products/views/addProducts');
     }
     //[GET] products update Page
     async showUpdatePage(req, res){
         try{
             const productDetails = await service.getProduct(req.params.productID);
-            res.render('products/updateProduct',{productDetails});
+            res.render('products/views/updateProduct',{productDetails});
         }catch(err){
             console.log({message: err});
         }
@@ -31,7 +31,7 @@ class ProductsController{
         try{
             const updatedProduct = await service.updateOneProduct(req.params.productID, req.body, req.files);
             const productDetails = await service.getProduct(req.params.productID);
-            res.render('products/updateProduct', {productDetails});
+            res.render('products/views/updateProduct', {productDetails});
         }catch(err){
             console.log({message: err});
         }
@@ -50,7 +50,7 @@ class ProductsController{
         try{
             const [detail] = await service.showDetail(req.params.productID);
             let newPrice = detail.price - detail.price * detail.sale / 100;
-            res.render('products/productsDetail',{detail,newPrice});
+            res.render('products/views/productsDetail',{detail,newPrice});
         }catch(err){
             console.log({message:err});
         }
@@ -60,7 +60,7 @@ class ProductsController{
         try{
 
             const newProduct = await service.addOneProduct(req.body,req.files);
-            res.render('products/addProducts');
+            res.render('products/views/addProducts');
         }catch (err){
             console.log({message: err});
         }

@@ -1,4 +1,4 @@
-const Account = require('../data/account');
+const Account = require('./AccountModel');
 
 const getAccountList = async(reqPage, option, username) => {
     let accounts = [];
@@ -42,5 +42,16 @@ const getAccountList = async(reqPage, option, username) => {
     }catch (err){
         console.log({message: err});
     }
+    return [accounts, activeAccounts, bannedAccounts, pages];
 }
-module.exports = {getAccountList}
+const showDetail = async (userID) => {
+    let detail = null;
+    try{
+        detail = await Account.findById(userID).lean();
+        return detail;
+    }catch (err){
+        console.log({message: err});
+    }
+    return detail;
+}
+module.exports = {getAccountList, showDetail}

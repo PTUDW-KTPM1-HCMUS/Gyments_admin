@@ -1,11 +1,11 @@
-const service = require('../models/services/UserService');
+const service = require('./UserService');
 class UserController{
     //[GET] Account Page
     account(req,res){
-        res.render('user/account');
+        res.render('users/views/account');
     }
     //[GET] Account Page
-    async userManagement(req,res){
+    async showUserManagement(req,res){
         try{
             let currentPage = req.query.page || 1;
             let option = req.query.options || 'All';
@@ -16,7 +16,15 @@ class UserController{
             let length = true; // check if search for 1 user or multiple
             if (username.length != 0)
                 length = false;
-            res.render('user/management',{accounts, activeAccounts, bannedAccounts, pages, currentPage,previous,next, option, username, length});
+            res.render('users/views/management',{accounts, activeAccounts, bannedAccounts, pages, currentPage,previous,next, option, username, length});
+        }catch (err){
+            console.log({message: err});
+        }
+    }
+    async getUserDetail(req, res){
+        try{
+            const detail = await service.showDetail(req.params.userID);
+            res.render('users/views/account', {detail});
         }catch (err){
             console.log({message: err});
         }
