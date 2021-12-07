@@ -10,7 +10,7 @@ class UserController{
             let currentPage = req.query.page || 1;
             let option = req.query.options || 'All';
             let username = req.query.username || '';
-            const [accounts, activeAccounts, bannedAccounts, pages] = await service.getAccountList(currentPage, option, username);
+            const [accounts, activeAccounts, bannedAccounts, pages] = await service.getAccountList(currentPage, option, username, req.user);
             let previous = Math.ceil(parseInt(currentPage)-1)<1? 1:Math.ceil(parseInt(currentPage)-1);
             let next = Math.ceil(parseInt(currentPage)+1) > pages.length?pages.length: Math.ceil(parseInt(currentPage)+1);
             let length = true; // check if search for 1 user or multiple

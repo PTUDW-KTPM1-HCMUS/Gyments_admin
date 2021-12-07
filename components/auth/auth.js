@@ -6,7 +6,7 @@ const guard = require('../../Middlewares/guard');
 
 router.get('/login',AuthController.showLoginPage);
 router.post('/login', passport.authenticate('local', {
-    successRedirect: '/user/account',
+    successRedirect: '/',
     failureRedirect: '/auth/login?wrongInf'
 }));
 router.get('/reset-password',AuthController.showResetPasswordPage);

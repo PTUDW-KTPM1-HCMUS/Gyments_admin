@@ -1,29 +1,34 @@
 const Account = require('./AccountModel');
 
-const getAccountList = async(reqPage, option, username) => {
+const getAccountList = async(reqPage, option, username, currentUser) => {
     let accounts = [];
     let activeAccounts = [];
     let bannedAccounts = [];
     let pages = [];
     try{
+        // use $ne: current user to get all user except this current user
         if (username.length != 0){
-            accounts = await Account.find({username: username}).lean();
-            activeAccounts = await Account.find({username: username, status: true}).lean();
-            bannedAccounts = await Account.find({username: username, status: false}).lean();
+            // use $eq username in order to find only one user
+            accounts = await Account.find({username: {$eq: username, $ne: currentUser.username}}).lean();
+            activeAccounts = await Account.find({username: {$eq: username, $ne: currentUser.username}, status: true}).lean();
+            bannedAccounts = await Account.find({username: {$eq: username, $ne: currentUser.username}, status: false}).lean();
         }
         else{
+            // find all user
             if (option === 'All'){
-                accounts = await Account.find().lean();
-                activeAccounts = await Account.find({status: true}).lean();
-                bannedAccounts = await Account.find({status: false}).lean();
+                accounts = await Account.find({username: {$ne: currentUser.username}}).lean();
+                activeAccounts = await Account.find({username: {$ne: currentUser.username}, status: true}).lean();
+                bannedAccounts = await Account.find({username: {$ne: currentUser.username}, status: false}).lean();
             }else if (option === 'Users'){
-                accounts = await Account.find({userType: false}).lean();
-                activeAccounts = await Account.find({status: true, userType: false}).lean();
-                bannedAccounts = await Account.find({status: false, userType: false}).lean();
+                // find only Users type
+                accounts = await Account.find({username: {$ne: currentUser.username}, userType: false}).lean();
+                activeAccounts = await Account.find({username: {$ne: currentUser.username}, status: true, userType: false}).lean();
+                bannedAccounts = await Account.find({username: {$ne: currentUser.username}, status: false, userType: false}).lean();
             }else if (option === 'Administrators'){
-                accounts = await Account.find({userType: true}).lean();
-                activeAccounts = await Account.find({status: true, userType: true}).lean();
-                bannedAccounts = await Account.find({status: false, userType: true}).lean();
+                // find only admins type
+                accounts = await Account.find({username: {$ne: currentUser.username}, userType: true}).lean();
+                activeAccounts = await Account.find({username: {$ne: currentUser.username}, status: true, userType: true}).lean();
+                bannedAccounts = await Account.find({username: {$ne: currentUser.username}, status: false, userType: true}).lean();
             }
             const perPage = 6;
             const page = parseInt(reqPage);
@@ -55,16 +60,25 @@ const showDetail = async (userID) => {
     return detail;
 }
 
-const findByUsername = function (username){
-    return Account.findOne({
-        username: username
-    }).lean();
+const findByUsername = async (username) => {
+    let user = null;
+    try {
+        user = await Account.findOne({username: username}).lean();
+        return user;
+    }catch (err){
+        console.log({message: err});
+    }
+    return user;
 };
 
 const validPassword= async (password, user)=> {
-    return Account.findOne({
-        username: user.username,
-        password: password
-    }).lean();
+    let account = null;
+    try{
+        account = await Account.findOne({username: user.username, password: password}).lean();
+        return account;
+    }catch (err){
+        console.log({message: err});
+    }
+    return account;
 }
 module.exports = {getAccountList, showDetail, findByUsername, validPassword}

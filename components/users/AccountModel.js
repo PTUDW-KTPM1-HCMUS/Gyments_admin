@@ -23,11 +23,11 @@ const accountSchema = new mongoose.Schema({
         type: Date,
         default: Date.now()
     },
-    f_name: {
+    fname: {
         type: "string",
         require: true
     },
-    l_name: {
+    lname: {
         type: "string",
         require: true
     },
