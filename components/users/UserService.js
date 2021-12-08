@@ -1,5 +1,6 @@
 const Account = require('./AccountModel');
 const bcrypt = require('bcrypt');
+const cloudinary = require('../../utils/cloudinary');
 
 const getAccountList = async(reqPage, option, username, currentUser) => {
     let accounts = [];
@@ -84,4 +85,40 @@ const validPassword= async (password, user)=> {
     }
     return account;
 }
-module.exports = {getAccountList, showDetail, findByUsername, validPassword}
+const findByEmail = async (email) => {
+    let userEmail = await Account.findOne({email: email});
+    return userEmail;
+}
+const findByPhone = async (phone) => {
+    let userPhone = await Account.findOne({phone: phone});
+    return userPhone;
+}
+const addAccount = async (accountDetail, avatarDetail) => {
+    const salt = bcrypt.genSaltSync(10);
+    const hashPass = await bcrypt.hashSync(accountDetail.password, salt);
+    let avatar = null;
+    let avatarID= null;
+    let imgResult = await cloudinary.uploader.upload(avatarDetail.path);
+    avatar = imgResult.secure_url;
+    avatarID = imgResult.public_id;
+    const newUser = new Account({
+        username: accountDetail.username,
+        password: hashPass,
+        userType: true,
+        fname: accountDetail.fname,
+        lname: accountDetail.lname,
+        email: accountDetail.email,
+        address: accountDetail.address,
+        phone: accountDetail.phone,
+        gender: accountDetail.gender,
+        avatar: avatar,
+        avatarID: avatarID
+    });
+    try{
+        const savedUser = newUser.save();
+        return savedUser;
+    }catch (err){
+        console.log({message: err});
+    }
+}
+module.exports = {getAccountList, showDetail, findByUsername, validPassword, findByPhone, findByEmail, addAccount}

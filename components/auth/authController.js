@@ -1,4 +1,4 @@
-const service = require('../users/UserService');
+
 class AuthController{
 
     async showLoginPage(req,res){
@@ -41,7 +41,8 @@ class AuthController{
         }
         req.logIn(user, function(err){
             if(err)return next(err);
-            return res.redirect('/user/profile');
+            // success login
+            return res.redirect('/');
         })
     }
 }
