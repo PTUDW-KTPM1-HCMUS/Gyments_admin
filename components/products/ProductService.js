@@ -120,7 +120,6 @@ const showDetail = async(productID) => {
     return [detail];
 }
 const addOneProduct =  async (productDetail, imgDetail) => {
-
     let images = [];
     let imagesID = [];
     for (let i =0; i<imgDetail.length;i++){

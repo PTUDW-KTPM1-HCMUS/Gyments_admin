@@ -19,6 +19,10 @@ const accountSchema = new mongoose.Schema({
         require: true,
         default: 0 // true is admin, false is user
     },
+    email:{
+        type: "string",
+        required: true
+    },
     createAt: {
         type: Date,
         default: Date.now()
@@ -41,7 +45,14 @@ const accountSchema = new mongoose.Schema({
     },
     gender: {
         type: "string",
-        require: true
+        require: true,
+        default: "Male"
+    },
+    avatar: {
+        type: "string"
+    },
+    avatarID: {
+        type: "string"
     }
 });
 

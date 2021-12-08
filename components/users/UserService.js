@@ -1,4 +1,5 @@
 const Account = require('./AccountModel');
+const cloudinary = require('../../utils/cloudinary');
 
 const getAccountList = async(reqPage, option, username, currentUser) => {
     let accounts = [];
@@ -71,7 +72,7 @@ const findByUsername = async (username) => {
     return user;
 };
 
-const validPassword= async (password, user)=> {
+const validPassword= async (password, user) => {
     let account = null;
     try{
         account = await Account.findOne({username: user.username, password: password}).lean();
@@ -81,4 +82,32 @@ const validPassword= async (password, user)=> {
     }
     return account;
 }
-module.exports = {getAccountList, showDetail, findByUsername, validPassword}
+const addAccount = async (accountDetail, avatarDetail) => {
+    let savedAccount = null;
+    let avatar = null;
+    let avatarID = null;
+    let imgResult = await cloudinary.uploader.upload(avatarDetail.path);
+    avatar = imgResult.secure_url;
+    avatarID = imgResult.public_id;
+    const newAccount = new Account({
+        username: accountDetail.username,
+        password: accountDetail.password,
+        userType: true, // set to admin
+        fname: accountDetail.fname,
+        lname: accountDetail.lname,
+        email: accountDetail.email,
+        address: accountDetail.address,
+        phone: accountDetail.phone,
+        gender: "Male",
+        avatar: avatar,
+        avatarID: avatarID
+    });
+    try{
+        savedAccount = await newAccount.save();
+        return savedAccount;
+    }catch (err){
+        console.log({message: err});
+    }
+    return savedAccount;
+}
+module.exports = {getAccountList, showDetail, findByUsername, validPassword, addAccount}

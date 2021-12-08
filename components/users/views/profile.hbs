@@ -2,7 +2,6 @@
 
     <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">
-
             <h1 class="app-page-title">My Account</h1>
             <div class="row gy-4">
                 <div class="col-12 col-lg-6">
@@ -26,8 +25,19 @@
                             <div class="item border-bottom py-3">
                                 <div class="row justify-content-between align-items-center">
                                     <div class="col-auto">
-                                        <div class="item-label mb-2"><strong>Photo</strong></div>
-                                        <div class="item-data"><img class="profile-image" src="/images/user.png" alt=""></div>
+                                        <div class="item-label mb-2"><strong>Avatar</strong></div>
+                                        <div class="item-data"><img class="profile-image" src="{{user.avatar}}" alt=""></div>
+                                    </div><!--//col-->
+                                    <div class="col text-end">
+                                        <a class="btn-sm app-btn-secondary" href="#">Change</a>
+                                    </div><!--//col-->
+                                </div><!--//row-->
+                            </div><!--//item-->
+                            <div class="item border-bottom py-3">
+                                <div class="row justify-content-between align-items-center">
+                                    <div class="col-auto">
+                                        <div class="item-label"><strong>Username</strong></div>
+                                        <div class="item-data">{{user.username}}</div>
                                     </div><!--//col-->
                                     <div class="col text-end">
                                         <a class="btn-sm app-btn-secondary" href="#">Change</a>
@@ -38,7 +48,7 @@
                                 <div class="row justify-content-between align-items-center">
                                     <div class="col-auto">
                                         <div class="item-label"><strong>Name</strong></div>
-                                        <div class="item-data">James Doe</div>
+                                        <div class="item-data">{{user.fname}} {{user.lname}}</div>
                                     </div><!--//col-->
                                     <div class="col text-end">
                                         <a class="btn-sm app-btn-secondary" href="#">Change</a>
@@ -49,7 +59,7 @@
                                 <div class="row justify-content-between align-items-center">
                                     <div class="col-auto">
                                         <div class="item-label"><strong>Email</strong></div>
-                                        <div class="item-data">james.doe@website.com</div>
+                                        <div class="item-data">{{user.email}}</div>
                                     </div><!--//col-->
                                     <div class="col text-end">
                                         <a class="btn-sm app-btn-secondary" href="#">Change</a>
@@ -59,10 +69,8 @@
                             <div class="item border-bottom py-3">
                                 <div class="row justify-content-between align-items-center">
                                     <div class="col-auto">
-                                        <div class="item-label"><strong>Website</strong></div>
-                                        <div class="item-data">
-                                            https://johndoewebsite.com
-                                        </div>
+                                        <div class="item-label"><strong>Address</strong></div>
+                                        <div class="item-data">{{user.address}}</div>
                                     </div><!--//col-->
                                     <div class="col text-end">
                                         <a class="btn-sm app-btn-secondary" href="#">Change</a>
@@ -72,10 +80,8 @@
                             <div class="item border-bottom py-3">
                                 <div class="row justify-content-between align-items-center">
                                     <div class="col-auto">
-                                        <div class="item-label"><strong>Location</strong></div>
-                                        <div class="item-data">
-                                            New York
-                                        </div>
+                                        <div class="item-label"><strong>Phone number</strong></div>
+                                        <div class="item-data">{{user.phone}}</div>
                                     </div><!--//col-->
                                     <div class="col text-end">
                                         <a class="btn-sm app-btn-secondary" href="#">Change</a>
@@ -83,10 +89,14 @@
                                 </div><!--//row-->
                             </div><!--//item-->
                         </div><!--//app-card-body-->
-                        <div class="app-card-footer p-4 mt-auto">
-                            <a class="btn app-btn-secondary" href="#">Manage Profile</a>
+                        <div class="row app-card-footer p-4 mt-auto">
+                            <div class="col-auto">
+                                <a class="btn app-btn-secondary" href="#">Manage Profile</a>
+                            </div>
+                            <div class="col-auto">
+                                <a class="btn btn-danger" href="/auth/logout">Log Out</a>
+                            </div>
                         </div><!--//app-card-footer-->
-
                     </div><!--//app-card-->
                 </div><!--//col-->
                 <div class="col-12 col-lg-6">

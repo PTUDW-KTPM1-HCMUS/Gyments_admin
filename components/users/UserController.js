@@ -1,10 +1,6 @@
 const service = require('./UserService');
 class UserController{
     //[GET] Account Page
-    account(req,res){
-        res.render('users/views/account');
-    }
-    //[GET] Account Page
     async showUserManagement(req,res){
         try{
             let currentPage = req.query.page || 1;
@@ -29,7 +25,21 @@ class UserController{
             console.log({message: err});
         }
     }
-
+    getAddAccountPage(req, res){
+        res.render('users/views/addAccount');
+    }
+    getProfilePage(req, res){
+        res.render('users/views/profile');
+    }
+    // [POST] add new account
+    async addAccount(req, res){
+        try{
+            const newAccount = await service.addAccount(req.body, req.file);
+            res.render('users/views/addAccount', {newAccount});
+        }catch (err){
+            console.log({message: err});
+        }
+    }
 }
 
 module.exports = new UserController;
