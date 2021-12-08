@@ -140,7 +140,12 @@
                         </div><!--//app-utility-item-->
                         {{#if user}}
                             <div class="app-utility-item app-user-dropdown dropdown">
-                                <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="/images/user.png" alt="user profile"></a>
+                                {{#if user.avatar}}
+                                <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="{{user.avatar}}" alt="user profile"></a>
+                            {{else}}
+                                <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="https://res.cloudinary.com/gspictures/image/upload/v1638986320/avatar-mau-den-8_voh7je.jpg" alt="user profile"></a>
+                            {{/if}}
+
                                 <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
                                     <li><a class="dropdown-item" href="/user/profile">Profile</a></li>
                                     <li><a class="dropdown-item" href="#">Settings</a></li>
