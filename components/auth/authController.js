@@ -41,7 +41,7 @@ class AuthController{
         }
         req.logIn(user, function(err){
             if(err)return next(err);
-            return res.redirect('/user/account');
+            return res.redirect('/user/profile');
         })
     }
 }
