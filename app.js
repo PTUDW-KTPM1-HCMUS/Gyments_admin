@@ -9,8 +9,6 @@ const route = require('./routes/index');
 
 const app = express();
 
-
-
 // view engine setup
 app.set('views', [path.join(__dirname, 'views'), path.join(__dirname, 'components')]);
 app.set('view engine', 'hbs');
@@ -33,7 +31,5 @@ app.use(function (req, res, next) {
     res.locals.user = req.user;
     next();
 })
-
 route(app);
-
 module.exports = app;
