@@ -54,10 +54,14 @@ const getProduct = async (productID) => {
 const updateOneProduct = async (productID, productDetail, imgDetail) => {
     let updateProduct = null;
     try{
+        const oldProductInfo = await Product.findById(productID).lean();
         let images = [];
         let imagesID = [];
-        console.log(imgDetail);
+
         if (imgDetail != null){
+            for (let i = 0 ; i<oldProductInfo.imagesID.length; i++){
+                await cloudinary.uploader.destroy(oldProductInfo.imagesID[i]);
+            }
             for (let i =0; i<imgDetail.length;i++){
                 let imgResult = await cloudinary.uploader.upload(imgDetail[i].path);
                 imagesID[i] = imgResult.public_id;
@@ -67,7 +71,7 @@ const updateOneProduct = async (productID, productDetail, imgDetail) => {
         productDetail.images = images;
         productDetail.imagesID = imagesID;
         // get old product information
-        const oldProductInfo = await Product.findById(productID).lean();
+
 
         // check if this value of key is "" then assign old value to it
         const keys = Object.keys(productDetail);
@@ -92,7 +96,14 @@ const updateOneProduct = async (productID, productDetail, imgDetail) => {
 const deleteOneProduct = async (productID) => {
     let removedProduct = null;
     try{
-        removedProduct = await Product.findByIdAndDelete(productID);
+        removedProduct = await Product.findById(productID);
+        if (!removedProduct)
+            return null;
+
+        //delete img on cloudinary
+        await cloudinary.uploader.destroy(removedProduct.imagesID);
+
+        await removedProduct.remove();
         return removedProduct;
     }catch (err){
         console.log({message: err});
