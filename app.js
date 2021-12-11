@@ -9,8 +9,6 @@ const route = require('./routes/index');
 
 const app = express();
 
-
-
 // view engine setup
 app.set('views', [path.join(__dirname, 'views'), path.join(__dirname, 'components')]);
 app.set('view engine', 'hbs');
@@ -24,8 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: true,
-    saveUninitialized: true,
-    cookie: {maxAge: 600000}
+    saveUninitialized: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -34,7 +31,5 @@ app.use(function (req, res, next) {
     res.locals.user = req.user;
     next();
 })
-
 route(app);
-
 module.exports = app;
