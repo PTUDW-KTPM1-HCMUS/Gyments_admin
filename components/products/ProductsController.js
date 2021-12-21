@@ -40,7 +40,8 @@ class ProductsController{
     async deleteProduct(req, res){
         try{
             const deletedProduct = await service.deleteOneProduct(req.params.productID);
-            res.redirect('/products');
+            const previousURL = req.get('referer');
+            res.redirect(previousURL);
         }catch(err){
             console.log({message: err});
         }

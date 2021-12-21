@@ -14,24 +14,20 @@ const accountSchema = new mongoose.Schema({
         require: true,
         default: 1 // true is active, false is banned
     },
+    email: { //email is email of user
+        type: "string",
+        require: true
+    },
     userType: {
         type: "boolean",
         require: true,
         default: 0 // true is admin, false is user
     },
-    email:{
-        type: "string",
-        required: true
-    },
     createAt: {
         type: Date,
         default: Date.now()
     },
-    fname: {
-        type: "string",
-        require: true
-    },
-    lname: {
+    name: {
         type: "string",
         require: true
     },
@@ -43,13 +39,9 @@ const accountSchema = new mongoose.Schema({
         type: "string",
         require: true
     },
-    gender: {
-        type: "string",
-        require: true,
-        default: "Male"
-    },
     avatar: {
-        type: "string"
+        type: "string",
+        default: "https://anhdep123.com/wp-content/uploads/2020/11/avatar-facebook-mac-dinh-nam.jpeg"
     },
     avatarID: {
         type: "string"

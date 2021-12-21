@@ -94,16 +94,18 @@ const updateOneProduct = async (productID, productDetail, imgDetail) => {
 }
 // delete a product by productID
 const deleteOneProduct = async (productID) => {
+    let product = null;
     let removedProduct = null;
     try{
-        removedProduct = await Product.findById(productID);
-        if (!removedProduct)
+        product = await Product.findById(productID).lean();
+        if (!product)
             return null;
 
         //delete img on cloudinary
-        await cloudinary.uploader.destroy(removedProduct.imagesID);
+        for (let i = 0; i < product.imagesID.length; i++)
+            await cloudinary.uploader.destroy(product.imagesID[i]);
 
-        await removedProduct.remove();
+        removedProduct = await Product.findByIdAndDelete(productID)
         return removedProduct;
     }catch (err){
         console.log({message: err});

@@ -3,8 +3,20 @@
     <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">
             <h1 class="app-page-title">My Account</h1>
+            {{#if email_existed}}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Email has existed!!!</strong>
+                    <button type="button" class="btn-close" onclick="this.parentElement.style.display='none'"></button>
+                </div>
+            {{/if}}
+            {{#if phone_existed}}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Phone number has existed!!!</strong>
+                    <button type="button" class="btn-close" onclick="this.parentElement.style.display='none'"></button>
+                </div>
+            {{/if}}
             <div class="row gy-4">
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-12">
                     <div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
                         <div class="app-card-header p-3 border-bottom-0">
                             <div class="row align-items-center gx-3">
@@ -29,7 +41,12 @@
                                         <div class="item-data"><img class="profile-image" src="{{user.avatar}}" alt=""></div>
                                     </div><!--//col-->
                                     <div class="col text-end">
-                                        <a class="btn-sm app-btn-secondary" href="#">Change</a>
+                                        <a class="btn-sm app-btn-secondary changeAvatarButton" href="#">Change</a>
+                                        <form action="/user/profile/changeavatar" method="POST" style="display: none" class="changeAvatarToggle" enctype="multipart/form-data">
+                                            <input type="file" name="avatar" required>
+                                            <button class="btn-primary" type="submit">Submit</button>
+                                            <button class="closeAvatarToggleBtn btn-danger" type="button">Close</button>
+                                        </form>
                                     </div><!--//col-->
                                 </div><!--//row-->
                             </div><!--//item-->
@@ -38,9 +55,7 @@
                                     <div class="col-auto">
                                         <div class="item-label"><strong>Username</strong></div>
                                         <div class="item-data">{{user.username}}</div>
-                                    </div><!--//col-->
-                                    <div class="col text-end">
-                                        <a class="btn-sm app-btn-secondary" href="#">Change</a>
+                                        <div class="item-data">Create at: {{user.createAt}}</div>
                                     </div><!--//col-->
                                 </div><!--//row-->
                             </div><!--//item-->
@@ -48,10 +63,15 @@
                                 <div class="row justify-content-between align-items-center">
                                     <div class="col-auto">
                                         <div class="item-label"><strong>Name</strong></div>
-                                        <div class="item-data">{{user.fname}} {{user.lname}}</div>
+                                        <div class="item-data">{{user.name}}</div>
                                     </div><!--//col-->
                                     <div class="col text-end">
-                                        <a class="btn-sm app-btn-secondary" href="#">Change</a>
+                                        <a class="btn-sm app-btn-secondary changeNameButton" href="#">Change</a>
+                                        <form action="/user/profile/changename" method="POST" style="display: none" class="changeNameToggle">
+                                            <input type="text" style="width: 60%" placeholder="Input new name" name="newName" required>
+                                            <button class="btn-primary" type="submit">Submit</button>
+                                            <button class="closeNameToggleBtn btn-danger" type="button">Close</button>
+                                        </form>
                                     </div><!--//col-->
                                 </div><!--//row-->
                             </div><!--//item-->
@@ -62,7 +82,12 @@
                                         <div class="item-data">{{user.email}}</div>
                                     </div><!--//col-->
                                     <div class="col text-end">
-                                        <a class="btn-sm app-btn-secondary" href="#">Change</a>
+                                        <a class="btn-sm app-btn-secondary changeEmailButton" href="#">Change</a>
+                                        <form action="/user/profile/changeemail" method="POST" style="display: none" class="changeEmailToggle">
+                                            <input type="text" style="width: 60%" placeholder="Input new email" name="newEmail" required>
+                                            <button class="btn-primary">Submit</button>
+                                            <button class="closeEmailToggleBtn btn-danger" type="button">Close</button>
+                                        </form>
                                     </div><!--//col-->
                                 </div><!--//row-->
                             </div><!--//item-->
@@ -73,7 +98,12 @@
                                         <div class="item-data">{{user.address}}</div>
                                     </div><!--//col-->
                                     <div class="col text-end">
-                                        <a class="btn-sm app-btn-secondary" href="#">Change</a>
+                                        <a class="btn-sm app-btn-secondary changeAddressButton" href="#">Change</a>
+                                        <form action="/user/profile/changeaddress" method="POST" style="display: none" class="changeAddressToggle">
+                                            <input type="text" style="width: 60%" placeholder="Input new address" name="newAddress" required>
+                                            <button class="btn-primary">Submit</button>
+                                            <button class="closeAddressToggleBtn btn-danger" type="button">Close</button>
+                                        </form>
                                     </div><!--//col-->
                                 </div><!--//row-->
                             </div><!--//item-->
@@ -84,7 +114,12 @@
                                         <div class="item-data">{{user.phone}}</div>
                                     </div><!--//col-->
                                     <div class="col text-end">
-                                        <a class="btn-sm app-btn-secondary" href="#">Change</a>
+                                        <a class="btn-sm app-btn-secondary changePhoneButton" href="#">Change</a>
+                                        <form action="/user/profile/changephone" method="POST" style="display: none" class="changePhoneToggle">
+                                            <input type="text" style="width: 60%" placeholder="Input new phone number" name="newPhone" required>
+                                            <button class="btn-primary">Submit</button>
+                                            <button class="closePhoneToggleBtn btn-danger" type="button">Close</button>
+                                        </form>
                                     </div><!--//col-->
                                 </div><!--//row-->
                             </div><!--//item-->

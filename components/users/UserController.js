@@ -17,22 +17,24 @@ class UserController{
             console.log({message: err});
         }
     }
-    async getUserDetail(req, res){
-        try{
-            const detail = await service.showDetail(req.params.userID);
-            res.render('users/views/account', {detail});
-        }catch (err){
-            console.log({message: err});
-        }
-    }
+    // async getUserDetail(req, res){
+    //     try{
+    //         const detail = await service.showDetail(req.params.userID);
+    //         res.render('users/views/account', {detail});
+    //     }catch (err){
+    //         console.log({message: err});
+    //     }
+    // }
     getAddAccountPage(req, res){
         const username_existed = req.query['username_existed']!== undefined;
-        const phone_existed = req.query['phone_existed']!== undefined;
+        const pass_dont_match = req.query['pass_dont_match']!== undefined;
         const email_existed = req.query['email_existed']!== undefined;
-        res.render('users/views/addAccount', {username_existed, phone_existed, email_existed});
+        res.render('users/views/addAccount', {username_existed,pass_dont_match, email_existed});
     }
     getProfilePage(req, res){
-        res.render('users/views/profile');
+        const phone_existed =req.query['phone_existed']!== undefined;
+        const email_existed =req.query['email_existed']!== undefined;
+        res.render('users/views/profile', {phone_existed, email_existed});
     }
     // [POST] add new account
     async addAccount(req, res){
@@ -44,15 +46,63 @@ class UserController{
             if (check_mail){
                 res.redirect('addAccount?email_existed');
             }else{
-                const check_phone = await service.findByPhone(req.body.phone);
-                if (check_phone){
-                    res.redirect('addAccount?phone_existed');
+                if (req.body.password !== req.body.confirmPassword){
+                    res.redirect('addAccount?pass_dont_match');
                 }else{
-                    const newAccount = await service.addAccount(req.body, req.file);
+                    const newAccount = await service.addAccount(req.body);
                     res.render('users/views/addAccount', {newAccount});
                 }
             }
         }
+    }
+    async changename(req, res) {
+        const newName = req.body.newName;
+        await service.changename(newName, req.user._id);
+        req.session.passport.user.name = newName;
+        res.redirect('/user/profile');
+    }
+    async changeemail(req, res) {
+        const newEmail = req.body.newEmail;
+        const check_email = await service.findByEmail(newEmail);
+        if (check_email){
+            res.redirect('/user/profile?email_existed');
+        }else{
+            await service.changeemail(newEmail, req.user._id);
+            req.session.passport.user.email = newEmail;
+            res.redirect('/user/profile');
+        }
+    }
+    async changeaddress(req, res) {
+        const newAddress = req.body.newAddress;
+        await service.changeaddress(newAddress, req.user._id);
+        req.session.passport.user.address = newAddress;
+        res.redirect('/user/profile');
+    }
+    async changephone(req, res) {
+        const newPhone = req.body.newPhone;
+        const check_phone = await service.findByPhone(newPhone);
+        if (check_phone){
+            res.redirect('/user/profile?phone_existed');
+        }else{
+            await service.changephone(newPhone, req.user._id);
+            req.session.passport.user.phone = newPhone;
+            res.redirect('/user/profile');
+        }
+    }
+    async changeavatar(req, res){
+        const newAvatar = await service.changeavatar(req.file, req.user._id);
+        req.session.passport.user.avatar = newAvatar;
+        res.redirect('/user/profile');
+    }
+    async banAccount(req, res){
+        const bannedUser = await service.banAccount(req.params.id);
+        const previousURL = req.get('referer');
+        res.redirect(previousURL);
+    }
+    async unbanAccount(req, res){
+        const unbanUser = await service.unbanAccount(req.params.id);
+        const previousURL = req.get('referer');
+        res.redirect(previousURL);
     }
 }
 

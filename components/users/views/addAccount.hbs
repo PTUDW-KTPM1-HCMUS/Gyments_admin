@@ -51,82 +51,42 @@
                 </button>
             </div>
         {{/if}}
-        {{#if phone_existed}}
+        {{#if pass_dont_match}}
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Phone has existed!!!</strong>
+                <strong>Two password don't match!!!</strong>
                 <button type="button" class="close" onclick="this.parentElement.style.display='none'">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
         {{/if}}
-        <form style="padding-top: 20px" action="/user/addAccount" method="POST" enctype="multipart/form-data">
-            <div class="border-bottom pt-4">
-                <h3>Admin personal information</h3>
-            </div>
-            <div class="form-row pt-3">
-                <div class="form-group col-md-6">
-                    <span style="color: #cc0000;">*</span>
-                    <label for="productName">First Name:</label>
-                    <input type="text" class="form-control" placeholder="Input first name" name="fname" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <span style="color: #cc0000;">*</span>
-                    <label for="productName">Last Name:</label>
-                    <input type="text" class="form-control" placeholder="Input last name" name="lname" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-8">
-                    <span style="color: #cc0000;">*</span>
-                    <label for="text">Email:</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">@</div>
-                        </div>
-                        <input type="text" class="form-control"  placeholder="Input email address" name="email" required>
-                    </div>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="text">Phone Number:</label>
-                    <input type="text" class="form-control" placeholder="Input phone number" name="phone">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-8">
-                    <span style="color: #cc0000;">*</span>
-                    <label for="inputAddress">Address:</label>
-                    <input type="text" class="form-control" placeholder="Input address" name="address" required>
-                </div>
-                <div class="form-group col-md-4">
-                    <span style="color: #cc0000;">*</span>
-                    <label for="inputGender">Gender</label>
-                    <select class="form-control" name="gender">
-                        <option selected>Choose...</option>
-                        <option>Male</option>
-                        <option>Female</option>
-                        <option>Others</option>
-                    </select>
-                </div>
-            </div>
+        <form style="padding-top: 20px" action="/user/addAccount" method="POST">
             <div class="border-bottom pt-4">
                     <h3>Account information</h3>
             </div>
-            <div class="form-row pt-3">
-                <div class="form-group col-md-6">
-                    <span style="color: #cc0000;">*</span>
-                    <label for="inputUsername">Username:</label>
-                    <input type="text" class="form-control" placeholder="Input username" name="username" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <span style="color: #cc0000;">*</span>
-                    <label for="inputPassword">Password:</label>
-                    <input type="password" class="form-control" placeholder="Input password" name="password" required>
+            <div class="form-group pt-3">
+                <span style="color: #cc0000;">*</span>
+                <label for="text">Email:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">@</div>
+                    </div>
+                    <input type="text" class="form-control"  placeholder="Input email address" name="email" required>
                 </div>
             </div>
             <div class="form-group">
                 <span style="color: #cc0000;">*</span>
-                <label for="exampleFormControlFile1">Admin Avatar:</label>
-                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="avatar" required>
+                <label for="inputUsername">Username:</label>
+                <input type="text" class="form-control" placeholder="Input username" name="username" required>
+            </div>
+            <div class="form-group">
+                <span style="color: #cc0000;">*</span>
+                <label for="inputPassword">Password:</label>
+                <input type="password" class="form-control" placeholder="Input password" name="password" required>
+            </div>
+            <div class="form-group">
+                <span style="color: #cc0000;">*</span>
+                <label for="inputPassword">Confirm Password:</label>
+                <input type="password" class="form-control" placeholder="Confirm password" name="confirmPassword" required>
             </div>
             <div class="form-group">
                 <button type="button" class="btn btn-primary float-right px-3" data-toggle="modal" data-target="#addAccountModal"><i class="fa fa-database"></i> Submit</button>

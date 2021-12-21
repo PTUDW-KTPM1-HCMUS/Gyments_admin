@@ -87,7 +87,8 @@
                                             {{/if}}
                                             <td class="cell">
                                             <span>
-                                                <a href="#" class="pe-4" >
+<!--                                                unban-->
+                                                <a href="/user/management/{{this._id}}/unban" class="pe-4" >
                                                     <i class="bi bi-person-check"></i>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-check" viewBox="0 0 16 16">
                                                         <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
@@ -95,8 +96,9 @@
                                                     </svg>
                                                 </a>
                                             </span>
-                                                <span>
-                                                <a href="#">
+                                            <span>
+<!--                                                ban-->
+                                                <a href="/user/management/{{this._id}}/ban">
                                                     <i class="bi bi-person-x"></i>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-person-x" viewBox="0 0 16 16">
                                                         <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
@@ -105,7 +107,7 @@
                                                 </a>
                                             </span>
                                             </td>
-                                            <td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a></td>
+                                            <td class="cell"><a class="btn-sm app-btn-secondary openDetailModal" data-toggle="modal"data-id="{{this._id}}|{{this.userType}}|{{this.username}}|{{this.name}}|{{this.email}}|{{this.createAt}}|{{this.avatar}}|{{this.status}}|{{this.address}}|{{this.phone}}" href="#viewAccountDetailModal">View</a></td>
                                         </tr>
                                     {{/each}}
                                     </tbody>
@@ -164,7 +166,7 @@
                                                 <td class="cell"><span class="badge bg-success">Active</span></td>
                                                 <td class="cell">
                                             <span>
-                                                <a href="#" class="pe-4" >
+                                                <a href="/user/management/{{this._id}}/unban" class="pe-4" >
                                                     <i class="bi bi-person-check"></i>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-check" viewBox="0 0 16 16">
                                                         <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
@@ -173,7 +175,7 @@
                                                 </a>
                                             </span>
                                                     <span>
-                                                <a href="#">
+                                                <a href="/user/management/{{this._id}}/ban">
                                                     <i class="bi bi-person-x"></i>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-person-x" viewBox="0 0 16 16">
                                                         <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
@@ -223,7 +225,7 @@
                                                 <td class="cell"><span class="badge bg-danger">Banned</span></td>
                                                 <td class="cell">
                                             <span>
-                                                <a href="#" class="pe-4" >
+                                                <a href="/user/management/{{this._id}}/unban" class="pe-4" >
                                                     <i class="bi bi-person-check"></i>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-check" viewBox="0 0 16 16">
                                                         <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
@@ -232,7 +234,7 @@
                                                 </a>
                                             </span>
                                                     <span>
-                                                <a href="#">
+                                                <a href="/user/management/{{this._id}}/ban">
                                                     <i class="bi bi-person-x"></i>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-person-x" viewBox="0 0 16 16">
                                                         <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
@@ -267,4 +269,30 @@
     </footer><!--//app-footer-->
 
 </div><!--//app-wrapper-->
+<div class="modal fade" id="viewAccountDetailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Account Information</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6>UserID: <span id="modal_userID" style="font-weight: normal"></span></h6>
+                <h6>Account Type: <span id="modal_accountType" style="font-weight: normal"></span></h6>
+                <h6>Username: <span id="modal_username" style="font-weight: normal"></span></h6>
+                <h6>Full name: <span id="modal_fullname" style="font-weight: normal"></span></h6>
+                <h6>Email: <span id="modal_email" style="font-weight: normal"></span></h6>
+                <h6>Create at: <span id="modal_createAt" style="font-weight: normal"></span></h6>
+                <h6>Avatar URL: <span id="modal_avatarURL" style="font-weight: normal"></span></h6>
+                <h6>Status: <span id="modal_status" style="font-weight: normal"></span></h6>
+                <h6>Address: <span id="modal_address" style="font-weight: normal"></span></h6>
+                <h6>Phone number: <span id="modal_phone" style="font-weight: normal"></span></h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="/js/productPagination.js"></script>

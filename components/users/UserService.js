@@ -93,26 +93,14 @@ const findByPhone = async (phone) => {
     let userPhone = await Account.findOne({phone: phone});
     return userPhone;
 }
-const addAccount = async (accountDetail, avatarDetail) => {
+const addAccount = async (accountDetail) => {
     const salt = bcrypt.genSaltSync(10);
     const hashPass = await bcrypt.hashSync(accountDetail.password, salt);
-    let avatar = null;
-    let avatarID= null;
-    let imgResult = await cloudinary.uploader.upload(avatarDetail.path);
-    avatar = imgResult.secure_url;
-    avatarID = imgResult.public_id;
     const newUser = new Account({
         username: accountDetail.username,
         password: hashPass,
         userType: true,
-        fname: accountDetail.fname,
-        lname: accountDetail.lname,
-        email: accountDetail.email,
-        address: accountDetail.address,
-        phone: accountDetail.phone,
-        gender: accountDetail.gender,
-        avatar: avatar,
-        avatarID: avatarID
+        email: accountDetail.email
     });
     try{
         const savedUser = newUser.save();
@@ -121,4 +109,33 @@ const addAccount = async (accountDetail, avatarDetail) => {
         console.log({message: err});
     }
 }
-module.exports = {getAccountList, showDetail, findByUsername, validPassword, findByPhone, findByEmail, addAccount}
+const changename = async (newName, userID) =>{
+    await Account.updateOne({_id: userID}, {$set: {name: newName}});
+}
+const changeemail = async (newEmail, userID) =>{
+    await Account.updateOne({_id: userID}, {$set: {email: newEmail}});
+}
+const changeaddress = async (newAddress, userID) =>{
+    await Account.updateOne({_id: userID}, {$set: {address: newAddress}});
+}
+const changephone = async (newPhone, userID) =>{
+    await Account.updateOne({_id: userID}, {$set: {phone: newPhone}});
+}
+const changeavatar = async (avatarDetail, userID) => {
+    let avatar = null;
+    let avatarID= null;
+    let imgResult = await cloudinary.uploader.upload(avatarDetail.path);
+    avatar = imgResult.secure_url;
+    avatarID = imgResult.public_id;
+    await Account.updateOne({_id: userID}, {$set: {avatar: avatar, avatarID: avatarID}});
+    return avatar;
+}
+const banAccount = async (userID) => {
+    const bannedUser = await Account.updateOne({_id: userID}, {$set: {status: false}});
+    return bannedUser;
+}
+const unbanAccount = async (userID) => {
+    const unbanUser = await Account.updateOne({_id: userID}, {$set: {status: true}});
+    return unbanUser;
+}
+module.exports = {getAccountList, showDetail, findByUsername, validPassword, findByPhone, findByEmail, addAccount, changename, changeemail, changeaddress, changephone, changeavatar, banAccount, unbanAccount}
