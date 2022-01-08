@@ -15,4 +15,5 @@ router.post('/profile/changeemail', UserController.changeemail);
 router.post('/profile/changeaddress',  UserController.changeaddress);
 router.post('/profile/changephone',  UserController.changephone);
 router.post('/profile/changeavatar',  upload.single("avatar"), UserController.changeavatar);
+router.post('/profile/changepass', UserController.changepassword);
 module.exports = router;

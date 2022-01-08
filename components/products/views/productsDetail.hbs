@@ -4,107 +4,108 @@
 <link rel="stylesheet" href="/css/product_detail/default.css">
 <!-- Product Thumbnail Start  -->
 <div class="product-body">
-<div class="main-product-thumbnail p-t-100 ptb-sm-60">
-    <div class="container">
-        <div class="thumb-bg">
-            <div class="row">
-                <!-- Main Thumbnail Image Start -->
-                <div class="col-lg-5 mb-all-40">
-                    <div class="slideshow-container">
-                        <!-- Full-width images with number and caption text -->
-                        {{#each detail.images}}
-                            <div class="mySlides fade_1">
-                                <img src="{{this}}" style="width:100%">
-                            </div>
-                        {{/each}}
-                       
-                        <!-- Next and previous buttons -->
-                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-                    </div>
-                    <br>
-                    <!-- The dots/circles -->
-                    
-                    <div style="text-align:center">
-                        {{#each detail.images}}
-                        <span class="dot" onclick="currentSlide(1)"></span>
-                        {{/each}}
-                    </div>
-                    
-                </div>
-                <!-- Main Thumbnail Image End -->
-                <!-- Thumbnail Description Start -->
-                
-                <div class="col-lg-7">
-                    <div class="thubnail-desc fix">
-                        <h3 class="product-header">{{detail.name}}</h3>
-                        <div class="rating-summary fix mtb-10">
-                            <div class="rating">
-                                {{#each detail.rate}}
-                                <i class="fa fa-star"></i>
-                                {{/each}}
-                            </div>
+    <div class="main-product-thumbnail p-t-100 ptb-sm-60">
+        <div class="container">
+            <div class="thumb-bg">
+                <div class="row">
+                    <!-- Main Thumbnail Image Start -->
+                    <div class="col-lg-5 mb-all-40">
+                        <div class="slideshow-container">
+                            <!-- Full-width images with number and caption text -->
+                            {{#each detail.images}}
+                                <div class="mySlides fade_1">
+                                    <img src="{{this}}" style="width:100%">
+                                </div>
+                            {{/each}}
+
+                            <!-- Next and previous buttons -->
+                            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                            <a class="next" onclick="plusSlides(1)">&#10095;</a>
                         </div>
-                        <div class="pro-price mtb-30">
-                            <p class="d-flex align-items-center"><span class="prev-price">{{detail.price}}$</span><span class="price">{{newPrice}}$</span><span class="saving-price">Sale {{detail.sale}}%</span></p>
+                        <br>
+                        <!-- The dots/circles -->
+
+                        <div style="text-align:center">
+                            {{#each detail.images}}
+                                <span class="dot" onclick="currentSlide(1)"></span>
+                            {{/each}}
                         </div>
-                        <p class="mb-20 pro-desc-details">{{detail.overview}} </p>
-                        <div class="box-quantity d-flex hot-product2">
-                            <form action="#">
-                                <input class="quantity mr-15" type="number" min="1" value="1">
-                            </form>
-                            <div class="pro-actions">
-                                <div class="actions-primary">
-                                    <a href="#" title="" data-original-title="Add to Cart"> + Add To Cart</a>
+
+                    </div>
+                    <!-- Main Thumbnail Image End -->
+                    <!-- Thumbnail Description Start -->
+
+                    <div class="col-lg-7">
+                        <div class="thubnail-desc fix">
+                            <h3 class="product-header">{{detail.name}}</h3>
+                            <div class="rating-summary fix mtb-10">
+                                <div class="rating">
+                                    {{#each detail.rate}}
+                                        <i class="fa fa-star"></i>
+                                    {{/each}}
                                 </div>
                             </div>
+                            <div class="pro-price mtb-30">
+                                <p class="d-flex align-items-center"><span class="prev-price">{{detail.price}}
+                                    $</span><span class="price">{{newPrice}}$</span><span
+                                        class="saving-price">Sale {{detail.sale}}%</span></p>
+                            </div>
+                            <p class="mb-20 pro-desc-details">{{detail.overview}} </p>
+                            <!--                        <div class="box-quantity d-flex hot-product2">-->
+                            <!--                            <form action="#">-->
+                            <!--                                <input class="quantity mr-15" type="number" min="1" value="1">-->
+                            <!--                            </form>-->
+                            <!--                            <div class="pro-actions">-->
+                            <!--                                <div class="actions-primary">-->
+                            <!--                                    <a href="#" title="" data-original-title="Add to Cart"> + Add To Cart</a>-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
+                            <!--                        </div>-->
+                            <!--                        <div class="pro-ref mt-20">-->
+                            <!--                            <p><span class="in-stock"><i class="ion-checkmark-round"></i> IN STOCK</span></p>-->
+                            <!--                        </div>-->
+                            <!--                        <div class="socila-sharing mt-25">-->
+                            <!--                            <ul class="d-flex">-->
+                            <!--                                <li>Share</li>-->
+                            <!--                            </ul>-->
+                            <!--                        </div>-->
                         </div>
-                        <div class="pro-ref mt-20">
-                            <p><span class="in-stock"><i class="ion-checkmark-round"></i> IN STOCK</span></p>
-                        </div>
-                        <div class="socila-sharing mt-25">
-                            <ul class="d-flex">
-                                <li>Share</li>
+                    </div>
+                    <!-- Thumbnail Description End -->
+                </div>
+                <!-- Row End -->
+            </div>
+        </div>
+        <!-- Container End -->
+    </div>
+    <!-- Product Thumbnail End -->
+
+    <!-- Product Thumbnail Description Start -->
+    <div class="thumnail-desc pb-100 pb-sm-60">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="main-thumb-desc nav tabs-area" role="tablist">
+                        <li><a class="active" data-toggle="tab" href="#dtail">Product Details</a></li>
+
+                    </ul>
+                    <!-- Product Thumbnail Tab Content Start -->
+                    <div class="tab-content thumb-content border-default">
+                        <div id="dtail" class="tab-pane fade show active">
+                            <ul style="  list-style-type: circle;">
+                                {{#each detail.description}}
+                                    <li>{{this}}</li>
+                                {{/each}}
                             </ul>
                         </div>
                     </div>
+                    <!-- Product Thumbnail Tab Content End -->
                 </div>
-                
-                <!-- Thumbnail Description End -->
             </div>
             <!-- Row End -->
         </div>
+        <!-- Container End -->
     </div>
-    <!-- Container End -->
-</div>
-<!-- Product Thumbnail End -->
-
-<!-- Product Thumbnail Description Start -->
-<div class="thumnail-desc pb-100 pb-sm-60">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <ul class="main-thumb-desc nav tabs-area" role="tablist">
-                    <li><a class="active" data-toggle="tab" href="#dtail">Product Details</a></li>
-                    
-                </ul>
-                <!-- Product Thumbnail Tab Content Start -->
-                <div class="tab-content thumb-content border-default">
-                    <div id="dtail" class="tab-pane fade show active">
-                        <ul style="  list-style-type: circle;">
-                            {{#each detail.description}}
-                            <li>{{this}}</li>
-                            {{/each}}
-                        </ul>
-                    </div>
-                </div>
-                <!-- Product Thumbnail Tab Content End -->
-            </div>
-        </div>
-        <!-- Row End -->
-    </div>
-    <!-- Container End -->
-</div>
-<!-- Product Thumbnail Description End -->
+    <!-- Product Thumbnail Description End -->
 </div>
 <script src="/js/product_detail/main.js"></script>

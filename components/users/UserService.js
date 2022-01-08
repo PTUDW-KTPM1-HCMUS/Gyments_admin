@@ -131,11 +131,22 @@ const changeavatar = async (avatarDetail, userID) => {
     return avatar;
 }
 const banAccount = async (userID) => {
-    const bannedUser = await Account.updateOne({_id: userID}, {$set: {status: false}});
-    return bannedUser;
-}
+  const bannedUser = await Account.updateOne(
+    { _id: userID },
+    { $set: { status: false } }
+  );
+  return bannedUser;
+};
 const unbanAccount = async (userID) => {
-    const unbanUser = await Account.updateOne({_id: userID}, {$set: {status: true}});
-    return unbanUser;
+  const unbanUser = await Account.updateOne(
+    { _id: userID },
+    { $set: { status: true } }
+  );
+  return unbanUser;
+};
+const changepass = async (username, newPassword) => {
+    const salt = bcrypt.genSaltSync(10);
+    const hashpass = await bcrypt.hashSync(newPassword,salt);
+    await Account.findOneAndUpdate({username: username}, {$set: {password: hashpass}});
 }
-module.exports = {getAccountList, showDetail, findByUsername, validPassword, findByPhone, findByEmail, addAccount, changename, changeemail, changeaddress, changephone, changeavatar, banAccount, unbanAccount}
+module.exports = {getAccountList, showDetail, findByUsername, validPassword, findByPhone, findByEmail, addAccount, changename, changeemail, changeaddress, changephone, changeavatar, banAccount, unbanAccount, changepass}
