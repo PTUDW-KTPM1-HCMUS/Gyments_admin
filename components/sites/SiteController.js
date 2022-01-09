@@ -1,7 +1,9 @@
+const siteService = require('./SiteService');
 class SiteController{
     //[GET] Home Page
-    homePage(req,res){
-        res.render('sites/views/index');
+    async homePage(req,res){
+        const top10Products = await siteService.getTop10Product();
+        res.render('sites/views/index', {top10Products});
     }
 
     //[GET] notifications
