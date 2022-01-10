@@ -6,6 +6,8 @@ const logger = require('morgan');
 const session = require("express-session");
 const passport = require('./utils/passport');
 const route = require('./routes/index');
+const Handlebars = require('handlebars');
+
 
 const app = express();
 
@@ -30,6 +32,8 @@ app.use(passport.session());
 app.use(function (req, res, next) {
     res.locals.user = req.user;
     next();
-})
+});
+
+
 route(app);
 module.exports = app;

@@ -9,7 +9,7 @@ const getAccountList = async(reqPage, option, username, currentUser) => {
     let pages = [];
     try{
         // use $ne: current user to get all user except this current user
-        if (username.length != 0){
+        if (username.length !== 0){
             // use $eq username in order to find only one user
             accounts = await Account.find({username: {$eq: username, $ne: currentUser.username}}).lean();
             activeAccounts = await Account.find({username: {$eq: username, $ne: currentUser.username}, status: true}).lean();

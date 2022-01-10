@@ -3,6 +3,7 @@ const productRouter = require('../components/products/products');
 const userRouter = require('../components/users/users');
 const authRouter = require('../components/auth/auth');
 const apiRouter = require('../components/api/api');
+const orderRouter = require('../components/orders/order');
 const guard = require('../Middlewares/guard');
 const createError = require("http-errors");
 
@@ -10,6 +11,7 @@ function route(app){
   app.use('/products',guard,productRouter);
   app.use('/user',guard,userRouter);
   app.use('/auth', authRouter);
+  app.use('/orders', orderRouter);
   app.use('/api', apiRouter);
   app.use('/',guard ,siteRouter);
 

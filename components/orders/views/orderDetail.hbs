@@ -1,0 +1,148 @@
+<link rel="stylesheet" href="/css/orderDetail/style.css">
+<div class="app-wrapper">
+    <div class="app-content pt-3 p-md-3 p-lg-4">
+        <!--================Order Details Area =================-->
+        <section class="order_details section-margin--small">
+            {{#if status}}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Update order status successfully!!!</strong>
+                    <button type="button" class="btn-close" onclick="this.parentElement.style.display='none'">
+                    </button>
+                </div>
+            {{/if}}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-xl-6 mb-4 mb-xl-0">
+                        <h3 class="align-items-center">Order Detail >> {{order.status}}</h3>
+                    </div>
+                    <div class="col-md-6 col-xl-6 mb-4 mb-xl-0">
+                        <form action="/orders/{{order._id}}" method="post">
+                            <div class="row">
+                                <div class="col-auto pl-50">
+                                    <select class="form-select w-auto" name="options">
+                                        <option selected value="Completed">Completed</option>
+                                        <option value="Delivery">Delivery</option>
+                                        <option value="Cancelled">Cancelled</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn app-btn-secondary">Update Status</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row mb-5">
+                    <div class="col-md-6 col-xl-6 mb-4 mb-xl-0">
+                        <div class="confirmation-card">
+                            <h3 class="billing-title">Order Information</h3>
+                            <table class="order-rable">
+                                <tr>
+                                    <td>Order number</td>
+                                    <td>: {{order._id}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Date</td>
+                                    <td>: {{order.date}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <td>: {{order.totalCost}}$</td>
+                                </tr>
+                                <tr>
+                                    <td>Payment method</td>
+                                    <td>: Cash</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-6 mb-4 mb-xl-0">
+                        <div class="confirmation-card">
+                            <h3 class="billing-title">Customer Information</h3>
+                            <table class="order-rable">
+                                <tr>
+                                    <td>Orderer</td>
+                                    <td>: {{order.customerID}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Receiver</td>
+                                    <td>: {{order.receiver}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Address</td>
+                                    <td>: {{order.address}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Phone Number</td>
+                                    <td>: {{order.phone}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="order_details_table">
+                    <h2>Order Details</h2>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {{#each order.products}}
+                                <tr>
+                                    <td>
+                                        <p>{{this.name}}</p>
+                                    </td>
+                                    <td>
+                                        <h5>x {{this.inCart}}</h5>
+                                    </td>
+                                    <td>
+                                        <p>${{this.totalPrice}}</p>
+                                    </td>
+                                </tr>
+                            {{/each}}
+                            <tr>
+                                <td>
+                                    <h4>Shipping</h4>
+                                </td>
+                                <td>
+                                    <h5></h5>
+                                </td>
+                                <td>
+                                    <p>Flat rate: $30.00</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>Total</h4>
+                                </td>
+                                <td>
+                                    <h5></h5>
+                                </td>
+                                <td>
+                                    <h4>$ {{order.totalCost}}</h4>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--================End Order Details Area =================-->
+    </div><!--//app-content-->
+
+    <footer class="app-footer">
+        <div class="container text-center py-3">
+            <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+            <small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a
+                    class="app-link" href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for
+                developers</small>
+        </div>
+    </footer><!--//app-footer-->
+
+</div><!--//app-wrapper-->
