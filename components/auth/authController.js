@@ -1,4 +1,5 @@
-
+const userService = require('../users/UserService');
+const email = require('../../utils/email');
 class AuthController{
 
     async showLoginPage(req,res){
@@ -45,6 +46,17 @@ class AuthController{
             return res.redirect('/');
         })
     }
+
+    async resetPassword(req,res){
+        const user = await userService.findByEmail(req.body.email);
+        if (!user || user.userType==false)
+            return res.render('auth/views/reset-password',{invalid : true, layout: false});
+        const newpass= String("")+Math.floor(Math.random()*1000000);
+        userService.changepass(user.username, newpass);
+        await email.sendPass(newpass,user.username,req.body.email);
+        res.render('auth/views/login',{ layout: false, checkEmail: true});
+    }
+
 }
 
 module.exports = new AuthController;

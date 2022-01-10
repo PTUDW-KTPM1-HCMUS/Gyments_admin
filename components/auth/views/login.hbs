@@ -46,6 +46,12 @@
                                 Your account is banned!
                             </div>
                         {{/if}}
+                        {{#if checkEmail}}
+                            <div class="alert">
+                                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                                Please check your email to get the account information!
+                            </div>
+                        {{/if}}
                         <div class="username mb-3">
                             <label class="sr-only" for="signin-username">Username</label>
                             <input id="signin-username" name="signin-username" type="text" class="form-control signin-username" placeholder="Username" required="required">

@@ -16,5 +16,6 @@ router.post('/login',function(req,res,next) {
 
 
 router.get('/reset-password',AuthController.showResetPasswordPage);
+router.post('/reset-password',AuthController.resetPassword);
 router.get('/logout',guard,AuthController.logout);
 module.exports = router;
